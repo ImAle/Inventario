@@ -1,4 +1,4 @@
-package Inventario.Inventario;
+package main;
 
 /**
  * Hello world!

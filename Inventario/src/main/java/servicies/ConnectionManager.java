@@ -7,12 +7,15 @@ import java.sql.SQLException;
 public class ConnectionManager {
 
     private static Connection conn = null;
+    private static String URL = "jdbc:mysql://localhost:3306/inventario?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static String USER = "user";
+    private static String PASSWORD = "user";
 
     public static Connection conectar() throws SQLException, ClassNotFoundException {
         if (conn == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventario?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "user", "user");
+                conn = DriverManager.getConnection(URL, USER, PASSWORD);
                 
             } catch (SQLException ex) {
                 throw new SQLException(ex);

@@ -1,0 +1,63 @@
+CREATE TABLE Usuarios (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_usuario VARCHAR(255) UNIQUE NOT NULL,
+    correo_electronico VARCHAR(255) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    rol ENUM('Administrador', 'Usuario') NOT NULL
+);
+
+CREATE TABLE Productos (
+    id_producto INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_producto VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    precio DOUBLE NOT NULL,
+    cantidad INT NOT NULL,
+    imagen VARCHAR(255)
+);
+
+INSERT INTO Usuarios (nombre_usuario, correo_electronico, contraseña, rol) 
+VALUES ('admin1', 'admin1@example.com', 'user', 'Administrador');
+
+INSERT INTO Usuarios (nombre_usuario, correo_electronico, contraseña, rol) 
+VALUES ('usuario1', 'usuario1@example.com', 'user', 'Usuario');
+
+INSERT INTO Usuarios (nombre_usuario, correo_electronico, contraseña, rol) 
+VALUES ('admin2', 'admin2@example.com', 'user', 'Administrador');
+
+INSERT INTO Usuarios (nombre_usuario, correo_electronico, contraseña, rol) 
+VALUES ('usuario2', 'usuario2@example.com', 'user', 'Usuario');
+
+INSERT INTO Usuarios (nombre_usuario, correo_electronico, contraseña, rol) 
+VALUES ('usuario3', 'usuario3@example.com', 'user', 'Usuario');
+
+
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 1', 'Descripción del Producto 1', 25.50, 100, 'imagen1.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 2', 'Descripción del Producto 2', 15.75, 200, 'imagen2.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 3', 'Descripción del Producto 3', 99.99, 50, 'imagen3.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 4', 'Descripción del Producto 4', 45.00, 10, 'imagen4.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 5', 'Descripción del Producto 5', 65.99, 30, 'imagen5.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 6', 'Descripción del Producto 6', 12.00, 500, 'imagen6.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 7', 'Descripción del Producto 7', 150.75, 5, 'imagen7.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 8', 'Descripción del Producto 8', 75.49, 25, 'imagen8.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 9', 'Descripción del Producto 9', 23.89, 60, 'imagen9.jpg');
+
+INSERT INTO Productos (nombre_producto, descripcion, precio, cantidad, imagen)
+VALUES ('Producto 10', 'Descripción del Producto 10', 35.60, 80, 'imagen10.jpg');

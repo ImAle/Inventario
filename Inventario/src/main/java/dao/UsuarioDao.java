@@ -57,7 +57,7 @@ public class UsuarioDao {
 	        }
 
 	        
-	        public List<Usuario> obtenerTodosLosUsuarios() throws ClassNotFoundException {
+	        public List<Usuario> readAll() throws ClassNotFoundException {
 	            String sql = "SELECT * FROM Usuarios";
 	            List<Usuario> usuarios = new ArrayList<>();
 	            
@@ -81,7 +81,7 @@ public class UsuarioDao {
 	            return usuarios;
 	        }
 
-	            public void actualizarUsuario(Usuario usuario) throws ClassNotFoundException {
+	            public void update(Usuario usuario) throws ClassNotFoundException {
 	                String sql = "UPDATE Usuarios SET nombre = ?, correo_electronico = ?, password = ?, rol = ? WHERE id = ?";
 	                
 	                try (Connection conn = ConnectionManager.conectar();
@@ -99,13 +99,26 @@ public class UsuarioDao {
 	                }
 	            }
 	        
-	            public void eliminarUsuario(int id) throws ClassNotFoundException {
+	            public void deleteById(int id) throws ClassNotFoundException {
 	                String sql = "DELETE FROM Usuarios WHERE id = ?";
 	                
 	                try (Connection conn = ConnectionManager.conectar();
 	                     PreparedStatement stmt = conn.prepareStatement(sql)) {
 	                	
 	                    stmt.setInt(1, id);
+	                    stmt.executeUpdate();
+	                    
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	            
+	            public void deleteAll(int id) throws ClassNotFoundException {
+	                String sql = "DELETE FROM Usuarios WHERE id";
+	                
+	                try (Connection conn = ConnectionManager.conectar();
+	                     PreparedStatement stmt = conn.prepareStatement(sql)) {
+	                	
 	                    stmt.executeUpdate();
 	                    
 	                } catch (SQLException e) {

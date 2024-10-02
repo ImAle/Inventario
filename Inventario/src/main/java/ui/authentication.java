@@ -1,4 +1,4 @@
-package servicies;
+package ui;
 
 import java.awt.EventQueue;
 
@@ -9,11 +9,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-import ui.register;
+import dao.UsuarioDao;
+import util.HashUtil;
 
 import java.awt.Color;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
+import java.security.NoSuchAlgorithmException;
 import java.awt.event.ActionEvent;
 
 public class authentication extends JFrame{
@@ -72,6 +74,13 @@ public class authentication extends JFrame{
 		frmInicioDeSesin.getContentPane().add(passwordLabel);
 		
 		JButton loginButton = new JButton("Iniciar sesión");
+		loginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String usuario = textFieldUser.getSelectedText();
+				String password = HashUtil.hashPassword(passwordField.getSelectedText());
+				boolean exito = UsuarioDao.login(usuario, password);
+				
+			}});
 		loginButton.setBounds(105, 242, 120, 23);
 		frmInicioDeSesin.getContentPane().add(loginButton);
 		

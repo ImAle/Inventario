@@ -8,12 +8,19 @@ import java.util.Base64;
 public class HashUtil {
 
     
-    public static String hashPassword(String password) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        String semilla = getSemilla();
+    public static String hashPassword(String password) {
+    	byte[] hashedPassword = null;
+    	
+    	try {
+    		MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String semilla = getSemilla();
+            md.update(semilla.getBytes());
+            hashedPassword = md.digest(password.getBytes());
+            
+    	}catch(NoSuchAlgorithmException nsaex) {
+    		nsaex.printStackTrace();
+    	}
         
-        md.update(semilla.getBytes());
-        byte[] hashedPassword = md.digest(password.getBytes());
         return Base64.getEncoder().encodeToString(hashedPassword); // Devuelve la contraseña cifrada
     }
 

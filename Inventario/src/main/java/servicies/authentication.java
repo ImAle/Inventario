@@ -83,5 +83,9 @@ public class authentication {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(93, 185, 150, 20);
 		frmInicioDeSesin.getContentPane().add(passwordField);
+		
+		JLabel lblNewLabel = new JLabel("¿No tienes cuenta?");
+		lblNewLabel.setBounds(190, 387, 115, 14);
+		frmInicioDeSesin.getContentPane().add(lblNewLabel);
 	}
 }

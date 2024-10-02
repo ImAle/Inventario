@@ -11,8 +11,14 @@ public class Usuario {
 	private Rol rol;
 	
 	public Usuario(int id, String nombre, String correoElectronico, String password, Rol rol) {
-		super();
 		this.id = id;
+		this.nombre = nombre;
+		this.correoElectronico = correoElectronico;
+		this.password = password;
+		this.rol = rol;
+	}
+	
+	public Usuario(String nombre, String correoElectronico, String password, Rol rol) {
 		this.nombre = nombre;
 		this.correoElectronico = correoElectronico;
 		this.password = password;

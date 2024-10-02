@@ -1,5 +1,6 @@
 package dao;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,18 +11,21 @@ import java.util.List;
 import model.Rol;
 import model.Usuario;
 import servicies.ConnectionManager;
+import util.HashUtil;
 
 public class UsuarioDao {
 
-	public void create(Usuario usuario) throws ClassNotFoundException {
+	public void create(Usuario usuario) throws ClassNotFoundException, NoSuchAlgorithmException {
 		String sql = "INSERT INTO Usuario (nombre, correo_electronico, password, rol) VALUES (?, ?, ?, ?)";
 
 		try (Connection conn = ConnectionManager.conectar();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
-
+			
+			String password = HashUtil.hashPassword(usuario.getPassword());
+			
 			stmt.setString(1, usuario.getNombre());
 			stmt.setString(2, usuario.getCorreoElectronico());
-			stmt.setString(3, usuario.getPassword());
+			stmt.setString(3, password);
 			stmt.setString(4, usuario.getRol().name());
 
 			stmt.executeUpdate();

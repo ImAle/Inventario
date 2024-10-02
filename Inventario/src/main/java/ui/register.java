@@ -22,7 +22,7 @@ import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class register {
+public class register extends JFrame{
 
 	private JFrame frmRegistroDeUsuarios;
 	private JTextField textField;

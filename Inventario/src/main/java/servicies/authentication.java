@@ -8,10 +8,15 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import ui.register;
+
 import java.awt.Color;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class authentication {
+public class authentication extends JFrame{
 
 	private JFrame frmInicioDeSesin;
 	private JTextField textFieldUser;
@@ -66,9 +71,9 @@ public class authentication {
 		passwordLabel.setBounds(10, 187, 90, 14);
 		frmInicioDeSesin.getContentPane().add(passwordLabel);
 		
-		JButton btnNewButton = new JButton("Iniciar sesión");
-		btnNewButton.setBounds(105, 242, 120, 23);
-		frmInicioDeSesin.getContentPane().add(btnNewButton);
+		JButton loginButton = new JButton("Iniciar sesión");
+		loginButton.setBounds(105, 242, 120, 23);
+		frmInicioDeSesin.getContentPane().add(loginButton);
 		
 		JLabel loginTitle = new JLabel("Inicie sesión");
 		loginTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -77,6 +82,11 @@ public class authentication {
 		frmInicioDeSesin.getContentPane().add(loginTitle);
 		
 		JButton registerButton = new JButton("Registrarse");
+		registerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new register();
+			}
+		});
 		registerButton.setBounds(190, 412, 115, 23);
 		frmInicioDeSesin.getContentPane().add(registerButton);
 		

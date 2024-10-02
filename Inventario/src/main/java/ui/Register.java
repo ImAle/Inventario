@@ -140,7 +140,10 @@ public class Register extends JFrame{
 		JButton loginButton = new JButton("Iniciar sesión");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new Authentication().setVisible(true);
+				//new Authentication().setVisible(true);
+				Authentication auth = new Authentication();
+				auth.setVisible(true);
+				
 	
 			}
 		});
@@ -150,6 +153,11 @@ public class Register extends JFrame{
 		JLabel infoLogin = new JLabel("¿Ya tienes cuenta?");
 		infoLogin.setBounds(10, 208, 164, 14);
 		frmRegistroDeUsuarios.getContentPane().add(infoLogin);
+		
+		frmRegistroDeUsuarios.setVisible(true);
+		
+		
+		
 		
 		
 	}

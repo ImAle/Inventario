@@ -95,15 +95,11 @@ public class Authentication extends JFrame{
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Hiciste clic!");
-				 try {
-	                    // Crear e instanciar la ventana de registro
-	                    Register registerWindow = new Register();
-	                    registerWindow.setVisible(true); // Mostrar la ventana de registro
-	                    System.out.println("Ventana de registro abierta");
-	                } catch (Exception ex) {
-	                    System.out.println("Error al abrir la ventana de registro: " + ex.getMessage());
-	                    ex.printStackTrace();
-	                }
+				//new Register().setVisible(true);
+				//dispose();
+				Register registerWindow = new Register();
+		        registerWindow.setVisible(true);
+		        frmInicioDeSesin.setVisible(false);
 			}
 		});
 		registerButton.setBounds(190, 412, 115, 23);

@@ -18,7 +18,8 @@ import java.awt.event.ActionListener;
 import java.security.NoSuchAlgorithmException;
 import java.awt.event.ActionEvent;
 
-public class authentication extends JFrame{
+
+public class Authentication extends JFrame{
 
 	private JFrame frmInicioDeSesin;
 	private JTextField textFieldUser;
@@ -31,7 +32,7 @@ public class authentication extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					authentication window = new authentication();
+					Authentication window = new Authentication();
 					window.frmInicioDeSesin.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +44,7 @@ public class authentication extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public authentication() {
+	public Authentication() {
 		initialize();
 	}
 
@@ -93,7 +94,16 @@ public class authentication extends JFrame{
 		JButton registerButton = new JButton("Registrarse");
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new register();
+				System.out.println("Hiciste clic!");
+				 try {
+	                    // Crear e instanciar la ventana de registro
+	                    Register registerWindow = new Register();
+	                    registerWindow.setVisible(true); // Mostrar la ventana de registro
+	                    System.out.println("Ventana de registro abierta");
+	                } catch (Exception ex) {
+	                    System.out.println("Error al abrir la ventana de registro: " + ex.getMessage());
+	                    ex.printStackTrace();
+	                }
 			}
 		});
 		registerButton.setBounds(190, 412, 115, 23);

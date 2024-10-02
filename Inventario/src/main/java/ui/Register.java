@@ -20,8 +20,9 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Button;
 
-public class register extends JFrame{
+public class Register extends JFrame{
 
 	private JFrame frmRegistroDeUsuarios;
 	private JTextField textField;
@@ -36,7 +37,7 @@ public class register extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					register window = new register();
+					Register window = new Register();
 					window.frmRegistroDeUsuarios.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +49,7 @@ public class register extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public register() {
+	public Register() {
 		initialize();
 	}
 
@@ -139,7 +140,7 @@ public class register extends JFrame{
 		JButton loginButton = new JButton("Iniciar sesión");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new authentication();
+				new Authentication().setVisible(true);
 	
 			}
 		});

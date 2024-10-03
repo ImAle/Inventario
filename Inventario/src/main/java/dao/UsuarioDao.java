@@ -28,8 +28,6 @@ public class UsuarioDao {
 			stmt.setString(4, usuario.getRol().name());
 
 			stmt.executeUpdate();
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -55,8 +53,6 @@ public class UsuarioDao {
 						Rol.valueOf(rs.getString("rol"))
 						);
 			}
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -82,8 +78,6 @@ public class UsuarioDao {
 						);
 				usuarios.add(usuario);
 			}
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -103,8 +97,6 @@ public class UsuarioDao {
 			stmt.setInt(5, usuario.getId());
 
 			stmt.executeUpdate();
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -119,8 +111,6 @@ public class UsuarioDao {
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -134,10 +124,7 @@ public class UsuarioDao {
 
 			stmt.executeUpdate();
 
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -157,9 +144,7 @@ public class UsuarioDao {
 			}else {
 				System.out.println("No existe usuario co tal nombre");			}
 				
-		}catch(ClassNotFoundException cnfex) {
-			cnfex.printStackTrace();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		

@@ -21,6 +21,17 @@ public class Producto {
 		this.imagenURI = imagenURI;
 	}
 
+	public Producto(String nombre, String descripcion, double precio, int cantidad, String imagenURI) {
+		super();
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.cantidad = cantidad;
+		this.imagenURI = imagenURI;
+	}
+
+
+
 	public String getNombre() {
 		return nombre;
 	}

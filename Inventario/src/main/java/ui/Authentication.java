@@ -47,10 +47,10 @@ public class Authentication extends JFrame {
         
         JButton loginButton = new JButton("Iniciar sesión");
         loginButton.addActionListener(new ActionListener() {
-			public boolean actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				String usuario = textFieldUser.getSelectedText();
 				String password = HashUtil.hashPassword(passwordField.getSelectedText());
-				return UsuarioDao.login(usuario, password);
+				UsuarioDao.login(usuario, password);
 			}});
         loginButton.setBounds(105, 242, 120, 23);
 		this.getContentPane().add(loginButton);

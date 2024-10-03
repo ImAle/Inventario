@@ -31,22 +31,6 @@ public class Register extends JFrame{
 	private JPasswordField passwordField_1;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Register window = new Register();
-					window.frmRegistroDeUsuarios.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public Register() {
@@ -57,54 +41,53 @@ public class Register extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmRegistroDeUsuarios = new JFrame();
-		frmRegistroDeUsuarios.setTitle("Registro de usuarios");
-		frmRegistroDeUsuarios.setBounds(100, 100, 326, 300);
-		frmRegistroDeUsuarios.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmRegistroDeUsuarios.getContentPane().setLayout(null);
+		this.setTitle("Registro de usuarios");
+		this.setBounds(100, 100, 326, 300);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(null);
 		
 		JLabel titleRegister = new JLabel("Registro de usuarios");
 		titleRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		titleRegister.setBounds(10, 11, 151, 20);
-		frmRegistroDeUsuarios.getContentPane().add(titleRegister);
+		this.getContentPane().add(titleRegister);
 		
 		JLabel userName = new JLabel("Nombre");
 		userName.setBounds(104, 55, 46, 14);
-		frmRegistroDeUsuarios.getContentPane().add(userName);
+		this.getContentPane().add(userName);
 		
 		textField = new JTextField();
 		textField.setBounds(160, 52, 140, 20);
-		frmRegistroDeUsuarios.getContentPane().add(textField);
+		this.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		JLabel userMail = new JLabel("Email");
 		userMail.setBounds(104, 80, 46, 14);
-		frmRegistroDeUsuarios.getContentPane().add(userMail);
+		this.getContentPane().add(userMail);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(160, 77, 140, 20);
-		frmRegistroDeUsuarios.getContentPane().add(textField_1);
+		this.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel userPassword = new JLabel("Contraseña");
 		userPassword.setBounds(82, 118, 68, 14);
-		frmRegistroDeUsuarios.getContentPane().add(userPassword);
+		this.getContentPane().add(userPassword);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(160, 115, 140, 20);
-		frmRegistroDeUsuarios.getContentPane().add(passwordField);
+		this.getContentPane().add(passwordField);
 		
 		JLabel userPasswordConfirm = new JLabel("Confirmar contraseña");
 		userPasswordConfirm.setBounds(24, 143, 126, 14);
-		frmRegistroDeUsuarios.getContentPane().add(userPasswordConfirm);
+		this.getContentPane().add(userPasswordConfirm);
 		
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setBounds(160, 140, 140, 20);
-		frmRegistroDeUsuarios.getContentPane().add(passwordField_1);
+		this.getContentPane().add(passwordField_1);
 		
 		JCheckBox userRol = new JCheckBox("Rol administrador");
 		userRol.setBounds(160, 167, 126, 23);
-		frmRegistroDeUsuarios.getContentPane().add(userRol);
+		this.getContentPane().add(userRol);
 		
 		JButton registerButton = new JButton("Registrarse");
 		registerButton.addActionListener(new ActionListener() {
@@ -135,30 +118,40 @@ public class Register extends JFrame{
 			}
 		});
 		registerButton.setBounds(211, 227, 89, 23);
-		frmRegistroDeUsuarios.getContentPane().add(registerButton);
+		this.getContentPane().add(registerButton);
 		
 		JButton loginButton = new JButton("Iniciar sesión");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//new Authentication().setVisible(true);
+				
 				Authentication auth = new Authentication();
 				auth.setVisible(true);
-				
+				dispose();
 	
 			}
 		});
 		loginButton.setBounds(10, 227, 111, 23);
-		frmRegistroDeUsuarios.getContentPane().add(loginButton);
+		this.getContentPane().add(loginButton);
 		
 		JLabel infoLogin = new JLabel("¿Ya tienes cuenta?");
 		infoLogin.setBounds(10, 208, 164, 14);
-		frmRegistroDeUsuarios.getContentPane().add(infoLogin);
+		this.getContentPane().add(infoLogin);
 		
-		frmRegistroDeUsuarios.setVisible(true);
-		
-		
-		
-		
+		this.setVisible(true);
 		
 	}
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				Register registerWindow = new Register();
+				registerWindow.setVisible(true);
+			}
+		});
+	}
+	
+	
 }

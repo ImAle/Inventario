@@ -10,9 +10,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import dao.UsuarioDao;
+import model.Rol;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JTable;
+import javax.swing.JLabel;
+
 public class ReadView {
 
 	private JFrame frmGestinDeProductos;
+	private JTable table;
+	UsuarioDao user = new UsuarioDao();
+	Rol rol = new Rol();
 
 	/**
 	 * Launch the application.
@@ -47,20 +59,50 @@ public class ReadView {
 		frmGestinDeProductos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestinDeProductos.getContentPane().setLayout(null);
 		
-		JMenu menuProductos = new JMenu("Menu");
-		menuProductos.setBounds(10, 11, 115, 26);
-		frmGestinDeProductos.getContentPane().add(menuProductos);
+		if(user.getRol() != Rol.ADMINISTRADOR) {
+			createButton.se
+		}
 		
-		JMenuItem createProducto = new JMenuItem("Crear");
-		menuProductos.add(createProducto);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(192, 192, 192));
+		panel.setBounds(10, 11, 110, 377);
+		frmGestinDeProductos.getContentPane().add(panel);
+		panel.setLayout(null);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Consultar");
-		menuProductos.add(mntmNewMenuItem);
+		JButton createButton = new JButton("Crear");
+		createButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		createButton.setBounds(10, 33, 89, 23);
+		panel.add(createButton);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Actualizar");
-		menuProductos.add(mntmNewMenuItem_1);
+		JButton updateButton = new JButton("Actualizar");
+		updateButton.setBounds(10, 67, 89, 23);
+		panel.add(updateButton);
 		
-		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Eliminar");
-		menuProductos.add(mntmNewMenuItem_2);
+		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.setBounds(10, 101, 89, 23);
+		panel.add(deleteButton);
+		
+		JButton readButton = new JButton("Leer");
+		readButton.setBounds(10, 135, 89, 23);
+		panel.add(readButton);
+		
+		JButton searchButton = new JButton("Buscar");
+		searchButton.setBounds(10, 169, 89, 23);
+		panel.add(searchButton);
+		
+		JButton exitButton = new JButton("Salir");
+		exitButton.setBounds(10, 203, 89, 23);
+		panel.add(exitButton);
+		
+		table = new JTable();
+		table.setBounds(130, 209, 400, 179);
+		frmGestinDeProductos.getContentPane().add(table);
+		
+		JLabel lblNewLabel = new JLabel("Tabla donde se muestran los datos");
+		lblNewLabel.setBounds(130, 184, 172, 14);
+		frmGestinDeProductos.getContentPane().add(lblNewLabel);
 	}
 }

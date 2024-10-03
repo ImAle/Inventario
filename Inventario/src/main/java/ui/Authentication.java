@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 
 import dao.UsuarioDao;
+import servicies.ConnectionManager;
 import util.HashUtil;
 
 import java.awt.event.ActionEvent;
@@ -51,6 +52,12 @@ public class Authentication extends JFrame {
 				String usuario = textFieldUser.getSelectedText();
 				String password = HashUtil.hashPassword(passwordField.getSelectedText());
 				UsuarioDao.login(usuario, password);
+				
+				if (usuario.isEmpty() || password.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Los campos son obligatorios",
+							"Error", JOptionPane.ERROR_MESSAGE);
+				}
+				new ReadView();
 			}});
         loginButton.setBounds(105, 242, 120, 23);
 		this.getContentPane().add(loginButton);
@@ -66,6 +73,21 @@ public class Authentication extends JFrame {
                 dispose();
             }
         });
+    }
+    
+    private static void correctPassword() {
+    	
+    	//Conexion con la base de datos
+    	ConnectionManager conect = new ConnectionManager();
+    	try {
+			// Conectamos y comprobamos mediante una sentencia sql el usuario y contraseña,
+    		// de esta manera comprobamos si estan bien para posteriormente incluirlo en la
+    		// validacion del login.
+    		
+    		// 
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
     }
 
     public static void main(String[] args) {

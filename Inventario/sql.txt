@@ -16,19 +16,19 @@ CREATE TABLE Productos (
 );
 
 INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('admin1', 'admin1@example.com', 'user', 'Administrador');
+VALUES ('admin1', 'admin1@example.com', 'user', 'ADMINISTRADOR');
 
 INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('usuario1', 'usuario1@example.com', 'user', 'Usuario');
+VALUES ('usuario1', 'usuario1@example.com', 'user', 'USUARIO');
 
 INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('admin2', 'admin2@example.com', 'user', 'Administrador');
+VALUES ('admin2', 'admin2@example.com', 'user', 'ADMINISTRADOR');
 
 INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('usuario2', 'usuario2@example.com', 'user', 'Usuario');
+VALUES ('usuario2', 'usuario2@example.com', 'user', 'USUARIO');
 
 INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('usuario3', 'usuario3@example.com', 'user', 'Usuario');
+VALUES ('usuario3', 'usuario3@example.com', 'user', 'USUARIO');
 
 
 

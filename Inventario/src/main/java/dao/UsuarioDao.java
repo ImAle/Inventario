@@ -15,7 +15,7 @@ import util.HashUtil;
 public class UsuarioDao {
 
 	public void create(Usuario usuario) {
-		String sql = "INSERT INTO Usuario (nombre, correo_electronico, password, rol) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO Usuarios (nombre, correo_electronico, password, rol) VALUES (?, ?, ?, ?)";
 
 		try (Connection conn = ConnectionManager.conectar();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -50,7 +50,7 @@ public class UsuarioDao {
 						rs.getString("nombre"),
 						rs.getString("correo_electronico"),
 						rs.getString("password"),
-						Rol.valueOf(rs.getString("rol"))
+						Rol.valueOf(rs.getString("rol").toUpperCase())
 						);
 			}
 		} catch (SQLException e) {
@@ -73,8 +73,8 @@ public class UsuarioDao {
 						rs.getInt("id"),
 						rs.getString("nombre"),
 						rs.getString("correo_electronico"),
-						rs.getString("contraseña"),
-						Rol.valueOf(rs.getString("rol"))
+						rs.getString("password"),
+						Rol.valueOf(rs.getString("rol").toUpperCase())
 						);
 				usuarios.add(usuario);
 			}
@@ -136,14 +136,19 @@ public class UsuarioDao {
 		try (Connection conn = ConnectionManager.conectar();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, nombreUsuario);
-			ResultSet rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery(); 
+			password = HashUtil.hashPassword(password);
+			
 			if (rs.next()) {
 				String passwordBd = rs.getString("password");
+				System.out.println();
 				if(passwordBd.equals(password))
 					exito = true;
-			}else {
-				System.out.println("No existe usuario co tal nombre");			}
-				
+				else
+					System.out.println("Contraseña incorrecta");
+			} else
+				System.out.println("No existe usuario con tal nombre");	
+						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

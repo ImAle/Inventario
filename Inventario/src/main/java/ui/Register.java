@@ -107,7 +107,7 @@ public class Register extends JFrame{
 				}else {
 					try {
 						UsuarioDao user = new UsuarioDao();
-						String rol = rolSelect ? "Administrador" : "Usuario";
+						String rol = rolSelect ? "ADMINISTRADOR" : "USUARIO";
 			            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
 			            user.create(usu);
 					} catch (Exception e2) {

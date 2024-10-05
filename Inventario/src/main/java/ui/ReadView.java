@@ -20,34 +20,18 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 
-public class ReadView {
+public class ReadView extends JFrame{
 
 	private JFrame frmGestinDeProductos;
 	private JTable table;
 	UsuarioDao user = new UsuarioDao();
 	private Rol rol;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ReadView window = new ReadView();
-					window.frmGestinDeProductos.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	
 	/**
 	 * Create the application.
 	 */
-	public ReadView() {
+	public ReadView(Rol rol) {
+		this.rol = rol;
 		initialize();
 	}
 
@@ -55,17 +39,16 @@ public class ReadView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmGestinDeProductos = new JFrame();
-		frmGestinDeProductos.setTitle("Gestión de productos");
-		frmGestinDeProductos.setBounds(100, 100, 753, 438);
-		frmGestinDeProductos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmGestinDeProductos.getContentPane().setLayout(null);
 		
+		setTitle("Gestión de productos");
+		setBounds(100, 100, 753, 438);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(192, 192, 192));
 		panel.setBounds(10, 11, 110, 377);
-		frmGestinDeProductos.getContentPane().add(panel);
+		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton createButton = new JButton("Crear");
@@ -98,15 +81,16 @@ public class ReadView {
 		
 		table = new JTable();
 		table.setBounds(130, 209, 400, 179);
-		frmGestinDeProductos.getContentPane().add(table);
+		getContentPane().add(table);
 		
 		JLabel lblNewLabel = new JLabel("Tabla donde se muestran los datos");
-		lblNewLabel.setBounds(130, 184, 172, 14);
-		frmGestinDeProductos.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(130, 184, 312, 14);
+		getContentPane().add(lblNewLabel);
 		
-		if(!user.equals(Rol.ADMINISTRADOR) ) {
+		if(rol != Rol.ADMINISTRADOR) {
 			createButton.setVisible(false);
             updateButton.setVisible(false);
+            deleteButton.setVisible(false);
 		}
 		
 	}

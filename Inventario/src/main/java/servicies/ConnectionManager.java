@@ -8,8 +8,8 @@ public class ConnectionManager {
 
     private static Connection conn = null;
     private static String URL = "jdbc:mysql://localhost:3306/inventario?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static String USER = "user";
-    private static String PASSWORD = "user";
+    private static String USER = "root";
+    private static String PASSWORD = "root";
 
     public static Connection conectar() {
     	try {

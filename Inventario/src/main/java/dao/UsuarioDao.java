@@ -142,6 +142,7 @@ public class UsuarioDao {
 			if (rs.next()) {
 				String passwordBd = rs.getString("password");
 				System.out.println();
+				
 				if(passwordBd.equals(password))
 					exito = true;
 				else

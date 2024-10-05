@@ -49,18 +49,17 @@ public class Authentication extends JFrame {
         JButton loginButton = new JButton("Iniciar sesión");
         loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				String usuario = textFieldUser.getText();
-				System.out.println(usuario);
-				System.out.println(new String(passwordField.getPassword()));
-				String password = HashUtil.hashPassword(new String(passwordField.getPassword()));
-				//String hashPassword = HashUtil.hashPassword(password);
-				UsuarioDao.login(usuario, password);
+				String password = new String(passwordField.getPassword());
 				
 				if (usuario.isEmpty() || password.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Los campos son obligatorios",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				}
-				new ReadView();
+				
+				if (UsuarioDao.login(usuario, password))
+					new ReadView();
 			}});
         loginButton.setBounds(105, 242, 120, 23);
 		this.getContentPane().add(loginButton);

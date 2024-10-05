@@ -95,14 +95,14 @@ public class Register extends JFrame{
 				String nombre = textField.getText();
 				String correoElectronico = textField_1.getText();
 				String password = new String(passwordField.getPassword());
-				password = new String(passwordField_1.getPassword());
+				String confirmPassword = new String(passwordField_1.getPassword());
 				boolean rolSelect = userRol.isSelected();
 				
-				if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty()) {
+				if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
 					JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
 							"Error", JOptionPane.ERROR_MESSAGE);
-				}else if (!passwordField.equals(passwordField_1)) {
-					 JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Las contraseñas no coinciden",
+				}else if (!password.equals(confirmPassword)) {
+					 JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "La contraseñas no coinciden",
 							 "Error", JOptionPane.ERROR_MESSAGE);
 				}else {
 					try {

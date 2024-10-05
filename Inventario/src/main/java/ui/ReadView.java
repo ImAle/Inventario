@@ -1,5 +1,6 @@
 package ui;
 
+import model.Rol;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -24,7 +25,7 @@ public class ReadView {
 	private JFrame frmGestinDeProductos;
 	private JTable table;
 	UsuarioDao user = new UsuarioDao();
-	Rol rol = new Rol();
+	private Rol rol;
 
 	/**
 	 * Launch the application.
@@ -42,6 +43,7 @@ public class ReadView {
 		});
 	}
 
+	
 	/**
 	 * Create the application.
 	 */
@@ -59,9 +61,6 @@ public class ReadView {
 		frmGestinDeProductos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGestinDeProductos.getContentPane().setLayout(null);
 		
-		if(user.getRol() != Rol.ADMINISTRADOR) {
-			createButton.se
-		}
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(192, 192, 192));
@@ -104,5 +103,11 @@ public class ReadView {
 		JLabel lblNewLabel = new JLabel("Tabla donde se muestran los datos");
 		lblNewLabel.setBounds(130, 184, 172, 14);
 		frmGestinDeProductos.getContentPane().add(lblNewLabel);
+		
+		if(!user.equals(Rol.ADMINISTRADOR) ) {
+			createButton.setVisible(false);
+            updateButton.setVisible(false);
+		}
+		
 	}
 }

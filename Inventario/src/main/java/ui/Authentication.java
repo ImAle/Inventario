@@ -49,8 +49,11 @@ public class Authentication extends JFrame {
         JButton loginButton = new JButton("Iniciar sesión");
         loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String usuario = textFieldUser.getSelectedText();
-				String password = HashUtil.hashPassword(passwordField.getSelectedText());
+				String usuario = textFieldUser.getText();
+				System.out.println(usuario);
+				System.out.println(new String(passwordField.getPassword()));
+				String password = HashUtil.hashPassword(new String(passwordField.getPassword()));
+				//String hashPassword = HashUtil.hashPassword(password);
 				UsuarioDao.login(usuario, password);
 				
 				if (usuario.isEmpty() || password.isEmpty()) {
@@ -73,21 +76,6 @@ public class Authentication extends JFrame {
                 dispose();
             }
         });
-    }
-    
-    private static void correctPassword() {
-    	
-    	//Conexion con la base de datos
-    	ConnectionManager conect = new ConnectionManager();
-    	try {
-			// Conectamos y comprobamos mediante una sentencia sql el usuario y contraseña,
-    		// de esta manera comprobamos si estan bien para posteriormente incluirlo en la
-    		// validacion del login.
-    		
-    		// 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
     }
 
     public static void main(String[] args) {

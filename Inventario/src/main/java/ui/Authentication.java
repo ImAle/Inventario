@@ -1,6 +1,8 @@
 package ui;
 
 import model.Rol;
+import model.Usuario;
+
 import javax.swing.*;
 
 import dao.UsuarioDao;
@@ -61,12 +63,12 @@ public class Authentication extends JFrame {
 				}
 				
 				if (UsuarioDao.login(usuario, password)) {
-					
 					JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
 					ReadView readView = new ReadView(rolUser);
 					readView.setVisible(true); 
+					dispose();
 				}
-				dispose();
+				
 			}});
         loginButton.setBounds(105, 242, 120, 23);
 		this.getContentPane().add(loginButton);
@@ -83,6 +85,7 @@ public class Authentication extends JFrame {
             }
         });
     }
+    
 
     public static void main(String[] args) {
         Authentication loginWindow = new Authentication();

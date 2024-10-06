@@ -54,28 +54,46 @@ public class ReadView extends JFrame{
 		JButton createButton = new JButton("Crear");
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				createProduct create = new createProduct();
+				create.setVisible(true);
 			}
 		});
 		createButton.setBounds(10, 33, 89, 23);
 		panel.add(createButton);
 		
 		JButton updateButton = new JButton("Actualizar");
+		updateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateProduct update = new updateProduct();
+				update.setVisible(true);
+			}
+		});
+		updateButton.setBackground(new Color(255, 255, 255));
 		updateButton.setBounds(10, 67, 89, 23);
 		panel.add(updateButton);
 		
 		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.setBackground(new Color(255, 255, 255));
 		deleteButton.setBounds(10, 101, 89, 23);
 		panel.add(deleteButton);
 		
 		JButton readButton = new JButton("Leer");
+		readButton.setBackground(new Color(255, 255, 255));
 		readButton.setBounds(10, 135, 89, 23);
 		panel.add(readButton);
 		
 		JButton searchButton = new JButton("Buscar");
+		searchButton.setBackground(new Color(255, 255, 255));
 		searchButton.setBounds(10, 169, 89, 23);
 		panel.add(searchButton);
 		
 		JButton exitButton = new JButton("Salir");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		exitButton.setBackground(new Color(255, 255, 255));
 		exitButton.setBounds(10, 203, 89, 23);
 		panel.add(exitButton);
 		
@@ -88,9 +106,10 @@ public class ReadView extends JFrame{
 		getContentPane().add(lblNewLabel);
 		
 		if(rol != Rol.ADMINISTRADOR) {
-			createButton.setVisible(false);
-            updateButton.setVisible(false);
-            deleteButton.setVisible(false);
+			System.out.println(rol);
+			//createButton.setVisible(false);
+            //updateButton.setVisible(false);
+            //deleteButton.setVisible(false);
 		}
 		
 	}

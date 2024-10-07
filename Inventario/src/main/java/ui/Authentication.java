@@ -64,8 +64,8 @@ public class Authentication extends JFrame {
 				
 				if (UsuarioDao.login(usuario, password)) {
 					JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-					ReadView readView = new ReadView(rolUser);
-					readView.setVisible(true); 
+					MainView mainView = new MainView(rolUser);
+					mainView.setVisible(true); 
 					dispose();
 				}
 				

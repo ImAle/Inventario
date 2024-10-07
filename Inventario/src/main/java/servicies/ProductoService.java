@@ -9,7 +9,7 @@ public class ProductoService {
 
 	private ProductoDao dao = new ProductoDao();
 
-	public void create(Usuario usuario, Producto producto) throws ClassNotFoundException {
+	public void create(Usuario usuario, Producto producto) {
 
 		if(usuario.getRol()==Rol.ADMINISTRADOR)
 			dao.create(producto);
@@ -18,15 +18,15 @@ public class ProductoService {
 
 	}
 	
-	public void readById(Producto producto) throws ClassNotFoundException {
+	public void readById(Producto producto) {
 		dao.readById(producto.getId());
 	}
 	
-	public void readAll(Producto producto) throws ClassNotFoundException {
+	public void readAll(Producto producto) {
 		dao.readAll();
 	}
 
-	public void update(Usuario usuario, Producto producto) throws ClassNotFoundException {
+	public void update(Usuario usuario, Producto producto) {
 
 		if(usuario.getRol()==Rol.ADMINISTRADOR)
 			dao.update(producto);
@@ -35,7 +35,7 @@ public class ProductoService {
 
 	}
 
-	public void delete(Usuario usuario, Producto producto) throws ClassNotFoundException {
+	public void delete(Usuario usuario, Producto producto) {
 
 		if(usuario.getRol()==Rol.ADMINISTRADOR)
 			dao.deleteById(producto.getId());
@@ -43,7 +43,7 @@ public class ProductoService {
 			System.out.println("El usuario no tiene privilegios para eliminar el producto");
 	}
 
-	public void deleteAll(Usuario usuario) throws ClassNotFoundException {
+	public void deleteAll(Usuario usuario) {
 
 		if(usuario.getRol()==Rol.ADMINISTRADOR)
 			dao.deleteAll();

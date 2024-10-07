@@ -12,7 +12,8 @@ import servicies.ConnectionManager;
 
 public class ProductoDao {
 
-	public void create(Producto producto) {
+	public boolean create(Producto producto) {
+		boolean exito = false;
 		String sql = "INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen) VALUES (?, ?, ?, ?, ?)";
 
 		try (Connection conn = ConnectionManager.conectar();
@@ -24,11 +25,14 @@ public class ProductoDao {
 			stmt.setInt(4, producto.getCantidad());
 			stmt.setString(5, producto.getImagenURI());
 
-			stmt.executeUpdate();
+			if (stmt.executeUpdate()>0)
+				exito = true;
 			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return exito;
 	}
 
 	public Producto readById(int id) {
@@ -84,7 +88,8 @@ public class ProductoDao {
 		return productos;
 	}
 
-	public void update(Producto producto) {
+	public boolean update(Producto producto) {
+		boolean exito = false;
 		String sql = "UPDATE Productos SET nombre = ?, descripcion = ?, precio = ?, cantidad = ?, imagen = ? WHERE id = ?";
 
 		try (Connection conn = ConnectionManager.conectar();
@@ -97,24 +102,32 @@ public class ProductoDao {
 			stmt.setString(5, producto.getImagenURI());
 			stmt.setInt(6, producto.getId());
 
-			stmt.executeUpdate();
+			if (stmt.executeUpdate()>0)
+				exito = true;
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return exito;
 	}
 
-	public void deleteById(int id) {
+	public boolean deleteById(int id) {
+		boolean exito = false;
 		String sql = "DELETE FROM Productos WHERE id = ?";
 
 		try (Connection conn = ConnectionManager.conectar();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 			stmt.setInt(1, id);
-			stmt.executeUpdate();
+			if (stmt.executeUpdate()>0)
+				exito = true;
 
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return exito;
 	}
 
 	public void deleteAll() {

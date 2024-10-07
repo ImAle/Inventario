@@ -14,7 +14,8 @@ import util.HashUtil;
 
 public class UsuarioDao {
 
-	public void create(Usuario usuario) {
+	public boolean create(Usuario usuario) {
+		boolean exito = false;
 		String sql = "INSERT INTO Usuarios (nombre, correo_electronico, password, rol) VALUES (?, ?, ?, ?)";
 
 		try (Connection conn = ConnectionManager.conectar();
@@ -27,10 +28,14 @@ public class UsuarioDao {
 			stmt.setString(3, password);
 			stmt.setString(4, usuario.getRol().name());
 
-			stmt.executeUpdate();
+			if (stmt.executeUpdate() > 0)
+				exito = true;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return exito;
 	}
 
 	public Usuario readById(int id) {

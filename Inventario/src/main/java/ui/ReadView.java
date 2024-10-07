@@ -38,12 +38,14 @@ public class ReadView extends JFrame{
 	private JTextField priceText;
 	private JTextField amountText;
 	private JTextField imageText;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField updateName;
+	private JTextField updateDescription;
+	private JTextField updatePrice;
+	private JTextField updateAmount;
+	private JTextField updateImage;
+	private JTextField updateId;
+	private JTextField deleteText;
+	private JTextField searchName;
 	
 	/**
 	 * Create the application.
@@ -69,55 +71,11 @@ public class ReadView extends JFrame{
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton createButton = new JButton("Crear");
-		createButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//createProduct create = new createProduct();
-				//create.setVisible(true);
-				//showPanel();
-				
-			}
-		});
-		createButton.setBounds(10, 33, 89, 23);
-		panel.add(createButton);
 		
-		JButton updateButton = new JButton("Actualizar");
-		updateButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		updateButton.setBackground(new Color(255, 255, 255));
-		updateButton.setBounds(10, 67, 89, 23);
-		panel.add(updateButton);
 		
-		JButton deleteButton = new JButton("Eliminar");
-		deleteButton.setBackground(new Color(255, 255, 255));
-		deleteButton.setBounds(10, 101, 89, 23);
-		panel.add(deleteButton);
-		
-		JButton readButton = new JButton("Listar");
-		readButton.setBackground(new Color(255, 255, 255));
-		readButton.setBounds(10, 135, 89, 23);
-		panel.add(readButton);
-		
-		JButton searchButton = new JButton("Buscar");
-		searchButton.setBackground(new Color(255, 255, 255));
-		searchButton.setBounds(10, 169, 89, 23);
-		panel.add(searchButton);
-		
-		JButton exitButton = new JButton("Salir");
-		exitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		exitButton.setBackground(new Color(255, 255, 255));
-		exitButton.setBounds(10, 203, 89, 23);
-		panel.add(exitButton);
 		
 		table = new JTable();
-		table.setBounds(130, 209, 400, 179);
+		table.setBounds(130, 209, 450, 179);
 		getContentPane().add(table);
 		
 		JLabel lblNewLabel = new JLabel("Tabla donde se muestran los datos");
@@ -215,6 +173,8 @@ public class ReadView extends JFrame{
 		titlePanel.setBounds(10, 11, 234, 14);
 		createPanel.add(titlePanel);
 		
+		
+		
 		JPanel updatePanel = new JPanel();
 		layeredPane.add(updatePanel, "name_172768850591800");
 		updatePanel.setLayout(null);
@@ -224,25 +184,25 @@ public class ReadView extends JFrame{
 		productName_1.setBounds(10, 70, 112, 14);
 		updatePanel.add(productName_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(132, 67, 112, 20);
-		updatePanel.add(textField_5);
+		updateName = new JTextField();
+		updateName.setColumns(10);
+		updateName.setBounds(132, 67, 112, 20);
+		updatePanel.add(updateName);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(132, 98, 112, 20);
-		updatePanel.add(textField_6);
+		updateDescription = new JTextField();
+		updateDescription.setColumns(10);
+		updateDescription.setBounds(132, 98, 112, 20);
+		updatePanel.add(updateDescription);
 		
 		JLabel description_1 = new JLabel("Descripción:");
 		description_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		description_1.setBounds(10, 101, 112, 14);
 		updatePanel.add(description_1);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(330, 67, 112, 20);
-		updatePanel.add(textField_7);
+		updatePrice = new JTextField();
+		updatePrice.setColumns(10);
+		updatePrice.setBounds(330, 67, 112, 20);
+		updatePanel.add(updatePrice);
 		
 		JLabel price_1 = new JLabel("Precio:");
 		price_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -254,15 +214,15 @@ public class ReadView extends JFrame{
 		amountProduct_1.setBounds(254, 101, 66, 14);
 		updatePanel.add(amountProduct_1);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(330, 98, 112, 20);
-		updatePanel.add(textField_8);
+		updateAmount = new JTextField();
+		updateAmount.setColumns(10);
+		updateAmount.setBounds(330, 98, 112, 20);
+		updatePanel.add(updateAmount);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(132, 129, 112, 20);
-		updatePanel.add(textField_9);
+		updateImage = new JTextField();
+		updateImage.setColumns(10);
+		updateImage.setBounds(132, 129, 112, 20);
+		updatePanel.add(updateImage);
 		
 		JLabel image_1 = new JLabel("Imagen del producto:");
 		image_1.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -274,12 +234,31 @@ public class ReadView extends JFrame{
 		id.setBounds(38, 39, 84, 14);
 		updatePanel.add(id);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(132, 36, 112, 20);
-		updatePanel.add(textField_10);
+		updateId = new JTextField();
+		updateId.setColumns(10);
+		updateId.setBounds(132, 36, 112, 20);
+		updatePanel.add(updateId);
 		
 		JButton createButton_2 = new JButton("Actualizar producto");
+		createButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = Integer.parseInt(updateId.getText());
+				
+				try {
+		            String nombre = updateName.getText();
+		            String descripcion = updateDescription.getText();
+		            double precio = Double.parseDouble(updatePrice.getText());
+		            int cantidad = Integer.parseInt(updateAmount.getText());
+		            String imagen = updateImage.getText();
+		            
+		            Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagen);
+		            ProductoDao productoDao = new ProductoDao();
+		            productoDao.update(producto);
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		});
 		createButton_2.setBounds(300, 134, 142, 23);
 		updatePanel.add(createButton_2);
 		
@@ -291,12 +270,170 @@ public class ReadView extends JFrame{
 		
 		JPanel deletePanel = new JPanel();
 		layeredPane.add(deletePanel, "name_172788986186200");
+		deletePanel.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("Introduzca la Id del producto a eliminar:");
+		lblNewLabel_1.setBounds(10, 36, 234, 14);
+		deletePanel.add(lblNewLabel_1);
+		
+		JLabel lblEliminarProductos = new JLabel("Eliminar Productos");
+		lblEliminarProductos.setHorizontalAlignment(SwingConstants.LEFT);
+		lblEliminarProductos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblEliminarProductos.setBounds(10, 11, 234, 14);
+		deletePanel.add(lblEliminarProductos);
+		
+		deleteText = new JTextField();
+		deleteText.setBounds(253, 33, 86, 20);
+		deletePanel.add(deleteText);
+		deleteText.setColumns(10);
+		
+		JButton delete = new JButton("Eliminar");
+		delete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = Integer.parseInt(deleteText.getText());
+				
+				try {
+					ProductoDao productoDao = new ProductoDao();
+					productoDao.deleteById(id);
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+				
+			}
+		});
+		delete.setBounds(167, 79, 89, 23);
+		deletePanel.add(delete);
 		
 		JPanel listarPanel = new JPanel();
 		layeredPane.add(listarPanel, "name_172813861614200");
+		listarPanel.setLayout(null);
+		
+		JLabel lblListarLosProductos = new JLabel("Listar los Productos");
+		lblListarLosProductos.setHorizontalAlignment(SwingConstants.LEFT);
+		lblListarLosProductos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblListarLosProductos.setBounds(10, 11, 234, 14);
+		listarPanel.add(lblListarLosProductos);
+		
+		JButton showLists = new JButton("Mostrar lista");
+		showLists.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProductoDao productoDao = new ProductoDao();
+				productoDao.readAll();
+			}
+		});
+		showLists.setBounds(153, 67, 119, 23);
+		listarPanel.add(showLists);
 		
 		JPanel searchPanel = new JPanel();
 		layeredPane.add(searchPanel, "name_172839804379000");
+		searchPanel.setLayout(null);
+		
+		JLabel lblBuscarProductos = new JLabel("Buscar Productos");
+		lblBuscarProductos.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBuscarProductos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblBuscarProductos.setBounds(10, 11, 234, 14);
+		searchPanel.add(lblBuscarProductos);
+		
+		JLabel productName_2 = new JLabel("Nombre de producto:");
+		productName_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		productName_2.setBounds(20, 39, 112, 14);
+		searchPanel.add(productName_2);
+		
+		searchName = new JTextField();
+		searchName.setColumns(10);
+		searchName.setBounds(142, 36, 112, 20);
+		searchPanel.add(searchName);
+		
+		JButton btnNewButton = new JButton("Buscar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProductoDao productoDao = new ProductoDao();
+				String nombre = searchName.getText();
+				productoDao.search(searchName.getName());
+			}
+		});
+		btnNewButton.setBounds(155, 86, 89, 23);
+		searchPanel.add(btnNewButton);
+		
+		JButton createButton = new JButton("Crear");
+		createButton.setBackground(new Color(255, 255, 255));
+		createButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createPanel.setVisible(true);
+				updatePanel.setVisible(false);
+				listarPanel.setVisible(false);
+				deletePanel.setVisible(false);
+				searchPanel.setVisible(false);
+			}
+		});
+		createButton.setBounds(10, 33, 89, 23);
+		panel.add(createButton);
+		
+		JButton updateButton = new JButton("Actualizar");
+		updateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createPanel.setVisible(false);
+				updatePanel.setVisible(true);
+				listarPanel.setVisible(false);
+				deletePanel.setVisible(false);
+				searchPanel.setVisible(false);
+			}
+		});
+		updateButton.setBackground(new Color(255, 255, 255));
+		updateButton.setBounds(10, 67, 89, 23);
+		panel.add(updateButton);
+		
+		JButton deleteButton = new JButton("Eliminar");
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createPanel.setVisible(false);
+				updatePanel.setVisible(false);
+				listarPanel.setVisible(false);
+				deletePanel.setVisible(true);
+				searchPanel.setVisible(false);
+			}
+		});
+		deleteButton.setBackground(new Color(255, 255, 255));
+		deleteButton.setBounds(10, 101, 89, 23);
+		panel.add(deleteButton);
+		
+		JButton readButton = new JButton("Listar");
+		readButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createPanel.setVisible(false);
+				updatePanel.setVisible(false);
+				listarPanel.setVisible(true);
+				deletePanel.setVisible(false);
+				searchPanel.setVisible(false);
+			}
+		});
+		readButton.setBackground(new Color(255, 255, 255));
+		readButton.setBounds(10, 135, 89, 23);
+		panel.add(readButton);
+		
+		JButton searchButton = new JButton("Buscar");
+		searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				createPanel.setVisible(false);
+				updatePanel.setVisible(false);
+				listarPanel.setVisible(false);
+				deletePanel.setVisible(false);
+				searchPanel.setVisible(true);
+			}
+		});
+		searchButton.setBackground(new Color(255, 255, 255));
+		searchButton.setBounds(10, 169, 89, 23);
+		panel.add(searchButton);
+		
+		JButton exitButton = new JButton("Salir");
+		exitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		exitButton.setBackground(new Color(255, 255, 255));
+		exitButton.setBounds(10, 203, 89, 23);
+		panel.add(exitButton);
 		
 		if(rol != Rol.ADMINISTRADOR) {
 			System.out.println(rol);

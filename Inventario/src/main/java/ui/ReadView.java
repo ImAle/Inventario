@@ -12,12 +12,14 @@ import java.awt.Color;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import dao.ProductoDao;
 import dao.UsuarioDao;
 import model.Rol;
 
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -70,8 +72,6 @@ public class ReadView extends JFrame{
 		panel.setBounds(10, 11, 110, 377);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
-		
 		
 		
 		table = new JTable();
@@ -317,9 +317,18 @@ public class ReadView extends JFrame{
 		JButton showLists = new JButton("Mostrar lista");
 		showLists.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProductoDao productoDao = new ProductoDao();
-				productoDao.readAll();
-			}
+		        ProductoDao productoDao = new ProductoDao();
+		        List<Producto> productos = productoDao.readAll(); 
+		        String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad", "imagen"};
+		        DefaultTableModel modelo = new DefaultTableModel(columnas, 0); 
+
+		        for (Producto producto : productos) {
+		            Object[] columna = {producto.getId(),producto.getNombre(),producto.getDescripcion(),
+		            		producto.getPrecio(),producto.getCantidad(),producto.getImagenURI()};
+		            modelo.addRow(columna);
+		        }
+		        table.setModel(modelo);
+		    }
 		});
 		showLists.setBounds(153, 67, 119, 23);
 		listarPanel.add(showLists);
@@ -349,7 +358,17 @@ public class ReadView extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				ProductoDao productoDao = new ProductoDao();
 				String nombre = searchName.getText();
-				productoDao.search(searchName.getName());
+				 List<Producto> productos = productoDao.search(nombre);
+				
+				String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad", "imagen"};
+		        DefaultTableModel modelo = new DefaultTableModel(columnas, 0); 
+				
+		        for (Producto producto : productos) {
+		            Object[] columna = {producto.getId(),producto.getNombre(),producto.getDescripcion(),
+		            		producto.getPrecio(),producto.getCantidad(),producto.getImagenURI()};
+		            modelo.addRow(columna);
+		        }
+		        table.setModel(modelo);
 			}
 		});
 		btnNewButton.setBounds(155, 86, 89, 23);

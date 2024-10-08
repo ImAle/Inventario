@@ -87,7 +87,7 @@ public class UpdateView extends JPanel {
 		add(updateImage);
 
 		JButton searchButton = new JButton("Buscar por ID");
-		searchButton.setBackground(new Color(128, 0, 255));
+		searchButton.setBackground(new Color(120, 141, 241));
 		searchButton.setBounds(294, 35, 142, 23);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

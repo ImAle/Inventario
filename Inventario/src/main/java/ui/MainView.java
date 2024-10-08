@@ -22,7 +22,7 @@ public class MainView extends JFrame {
         getContentPane().setLayout(null);
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(128, 0, 255));
+        panel.setBackground(new Color(120, 141, 241));
         panel.setBounds(10, 11, 110, 377);
         getContentPane().add(panel);
         panel.setLayout(null);
@@ -89,8 +89,18 @@ public class MainView extends JFrame {
         		dispose();
         	}
         });
-        exitButton.setBounds(10, 203, 89, 23);
+        exitButton.setBounds(10, 237, 89, 23);
         panel.add(exitButton);
+        
+        JButton btnNewButton = new JButton("Imagenes");
+        btnNewButton.setBackground(new Color(255, 255, 255));
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		switchPanel(new ImageView());
+        	}
+        });
+        btnNewButton.setBounds(10, 203, 89, 23);
+        panel.add(btnNewButton);
 
         switchPanel(new ListView());
 

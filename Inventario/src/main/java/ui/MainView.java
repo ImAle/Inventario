@@ -81,6 +81,16 @@ public class MainView extends JFrame {
         });
         searchButton.setBounds(10, 169, 89, 23);
         panel.add(searchButton);
+        
+        JButton exitButton = new JButton("Salir");
+        exitButton.setBackground(new Color(255, 255, 255));
+        exitButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		dispose();
+        	}
+        });
+        exitButton.setBounds(10, 203, 89, 23);
+        panel.add(exitButton);
 
         switchPanel(new ListView());
 
@@ -97,6 +107,4 @@ public class MainView extends JFrame {
     	layeredPane.repaint();
     	layeredPane.revalidate();
     }
-
-
 }

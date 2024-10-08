@@ -56,6 +56,7 @@ public class Authentication extends JFrame {
 				
 				String usuario = textFieldUser.getText();
 				String password = new String(passwordField.getPassword());
+				dao = new UsuarioDao();			
 				int id;
 				
 				if (usuario.isEmpty() || password.isEmpty()) {

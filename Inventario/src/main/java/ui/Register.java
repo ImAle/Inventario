@@ -21,6 +21,8 @@ import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Button;
+import javax.swing.SwingConstants;
+import java.awt.Color;
 
 public class Register extends JFrame{
 
@@ -47,8 +49,9 @@ public class Register extends JFrame{
 		this.getContentPane().setLayout(null);
 		
 		JLabel titleRegister = new JLabel("Registro de usuarios");
-		titleRegister.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		titleRegister.setBounds(10, 11, 151, 20);
+		titleRegister.setHorizontalAlignment(SwingConstants.CENTER);
+		titleRegister.setFont(new Font("Tahoma", Font.BOLD, 14));
+		titleRegister.setBounds(10, 11, 290, 20);
 		this.getContentPane().add(titleRegister);
 		
 		JLabel userName = new JLabel("Nombre");
@@ -90,6 +93,7 @@ public class Register extends JFrame{
 		this.getContentPane().add(userRol);
 		
 		JButton registerButton = new JButton("Registrarse");
+		registerButton.setBackground(new Color(255, 255, 255));
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nombre = textField.getText();
@@ -117,10 +121,11 @@ public class Register extends JFrame{
 				
 			}
 		});
-		registerButton.setBounds(211, 227, 89, 23);
+		registerButton.setBounds(195, 227, 105, 23);
 		this.getContentPane().add(registerButton);
 		
 		JButton loginButton = new JButton("Iniciar sesión");
+		loginButton.setBackground(new Color(255, 255, 255));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

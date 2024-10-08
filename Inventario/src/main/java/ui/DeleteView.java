@@ -29,6 +29,7 @@ public class DeleteView extends JPanel {
 		add(deleteId);
 
 		JButton deleteButton = new JButton("Eliminar producto");
+		deleteButton.setBackground(new Color(255, 255, 255));
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = deleteId.getText();

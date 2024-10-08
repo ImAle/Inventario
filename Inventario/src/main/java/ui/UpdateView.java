@@ -18,7 +18,7 @@ public class UpdateView extends JPanel {
 
 	public UpdateView() {
 		setLayout(null);
-		setPreferredSize(new Dimension(500, 402));
+		setPreferredSize(new Dimension(500, 301));
 
 		JLabel lblActualizacionDeProductos = new JLabel("Actualización de Productos");
 		lblActualizacionDeProductos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,6 +87,7 @@ public class UpdateView extends JPanel {
 		add(updateImage);
 
 		JButton searchButton = new JButton("Buscar por ID");
+		searchButton.setBackground(new Color(128, 0, 255));
 		searchButton.setBounds(294, 35, 142, 23);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,7 +121,8 @@ public class UpdateView extends JPanel {
 		add(searchButton);
 
 		JButton updateButton = new JButton("Actualizar producto");
-		updateButton.setBounds(179, 151, 142, 23);
+		updateButton.setBackground(new Color(255, 255, 255));
+		updateButton.setBounds(270, 151, 166, 23);
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idText = updateId.getText();

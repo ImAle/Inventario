@@ -22,13 +22,13 @@ public class MainView extends JFrame {
         getContentPane().setLayout(null);
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(192, 192, 192));
+        panel.setBackground(new Color(128, 0, 255));
         panel.setBounds(10, 11, 110, 377);
         getContentPane().add(panel);
         panel.setLayout(null);
 
         layeredPane = new JLayeredPane();
-        layeredPane.setBounds(130, 11, 450, 168);
+        layeredPane.setBounds(130, 11, 597, 248);
         getContentPane().add(layeredPane);
         layeredPane.setLayout(new CardLayout(0, 0));
 

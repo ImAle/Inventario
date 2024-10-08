@@ -74,6 +74,7 @@ public class CreateView extends JPanel {
 		add(imageText);
 
 		JButton createButton = new JButton("Crear producto");
+		createButton.setBackground(new Color(255, 255, 255));
 		createButton.setBounds(294, 134, 142, 23);
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

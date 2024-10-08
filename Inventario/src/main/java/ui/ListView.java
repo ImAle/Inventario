@@ -23,7 +23,7 @@ public class ListView extends JPanel {
 
         table = new JTable();
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(10, 36, 570, 178);
+        scrollPane.setBounds(10, 36, 570, 200);
         add(scrollPane);
 
         listProducts();

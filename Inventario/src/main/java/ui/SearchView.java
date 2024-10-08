@@ -39,6 +39,7 @@ public class SearchView extends JPanel {
         add(scrollPane);
 
         JButton searchButton = new JButton("Buscar producto");
+        searchButton.setBackground(new Color(255, 255, 255));
         searchButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = searchName.getText();

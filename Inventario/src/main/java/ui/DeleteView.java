@@ -10,6 +10,10 @@ public class DeleteView extends JPanel {
 	private JTextField deleteId;
 
 	public DeleteView() {
+		initialize();
+	}
+	
+	public void initialize() {
 		setLayout(null);
 
 		JLabel titlePanel = new JLabel("Eliminar Producto");
@@ -32,21 +36,25 @@ public class DeleteView extends JPanel {
 		deleteButton.setBackground(new Color(255, 255, 255));
 		deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String id = deleteId.getText();
-				if (!id.isEmpty()) {
-
-					ProductoDao producto = new ProductoDao();
-					if (producto.deleteById(Integer.parseInt(id))) {
-						JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-						deleteId.setText("");
-					} else
-						JOptionPane.showMessageDialog(null, "Error al eliminar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}else 
-					JOptionPane.showMessageDialog(null, "El campo ID es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+				deleteProduct();
 			}
 		});
 		deleteButton.setBounds(254, 40, 142, 23);
 		add(deleteButton);
+	}
+	
+	public void deleteProduct() {
+		String id = deleteId.getText();
+		if (!id.isEmpty()) {
+
+			ProductoDao producto = new ProductoDao();
+			if (producto.deleteById(Integer.parseInt(id))) {
+				JOptionPane.showMessageDialog(null, "Producto eliminado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+				deleteId.setText("");
+			} else
+				JOptionPane.showMessageDialog(null, "Error al eliminar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}else 
+			JOptionPane.showMessageDialog(null, "El campo ID es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
 	}
 }

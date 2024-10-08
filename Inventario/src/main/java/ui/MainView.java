@@ -92,15 +92,15 @@ public class MainView extends JFrame {
         exitButton.setBounds(10, 237, 89, 23);
         panel.add(exitButton);
         
-        JButton btnNewButton = new JButton("Imagenes");
-        btnNewButton.setBackground(new Color(255, 255, 255));
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton readButton = new JButton("Leer");
+        readButton.setBackground(new Color(255, 255, 255));
+        readButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		switchPanel(new ImageView());
+        		switchPanel(new ReadView());
         	}
         });
-        btnNewButton.setBounds(10, 203, 89, 23);
-        panel.add(btnNewButton);
+        readButton.setBounds(10, 203, 89, 23);
+        panel.add(readButton);
 
         switchPanel(new ListView());
 

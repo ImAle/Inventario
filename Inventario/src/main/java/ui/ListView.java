@@ -13,6 +13,10 @@ public class ListView extends JPanel {
     private JTable table;
 
     public ListView() {
+    	initialize();
+    }
+    
+    public void initialize() {
     	setLayout(null);
 
         JLabel titlePanel = new JLabel("Lista de Productos");
@@ -29,7 +33,7 @@ public class ListView extends JPanel {
         listProducts();
     }
 
-    private void listProducts() {
+    public void listProducts() {
             ProductoDao productoDao = new ProductoDao();
             List<Producto> productos = productoDao.readAll();
             String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad", "imagen"};

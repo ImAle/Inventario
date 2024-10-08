@@ -54,24 +54,7 @@ public class Authentication extends JFrame {
         loginButton.setBackground(new Color(255, 255, 255));
         loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				String usuario = textFieldUser.getText();
-				String password = new String(passwordField.getPassword());
-				dao = new UsuarioDao();			
-				int id;
-				
-				if (usuario.isEmpty() || password.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Los campos son obligatorios",
-							"Error", JOptionPane.ERROR_MESSAGE);
-				}
-				
-				if ((id = UsuarioDao.login(usuario, password)) > -1) {
-					JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-					MainView mainView = new MainView(dao.readById(id).getRol());
-					mainView.setVisible(true); 
-					dispose();
-				}
-				
+				login();
 			}});
         loginButton.setBounds(81, 279, 120, 23);
 		this.getContentPane().add(loginButton);
@@ -99,16 +82,40 @@ public class Authentication extends JFrame {
         
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Register registerWindow = new Register();
-                registerWindow.setVisible(true);
-                dispose();
+                changeToRegister();
             }
         });
     }
     
 
+    public void login() {
+    	String usuario = textFieldUser.getText();
+		String password = new String(passwordField.getPassword());
+		dao = new UsuarioDao();			
+		int id;
+		
+		if (usuario.isEmpty() || password.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Los campos son obligatorios",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		if ((id = UsuarioDao.login(usuario, password)) > -1) {
+			JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
+			MainView mainView = new MainView(dao.readById(id).getRol());
+			mainView.setVisible(true); 
+			dispose();
+		}
+    }
+    
+    public void changeToRegister() {
+    	Register registerWindow = new Register();
+        registerWindow.setVisible(true);
+        dispose();
+    }
+    
     public static void main(String[] args) {
         Authentication loginWindow = new Authentication();
         loginWindow.setVisible(true);
     }
+    
 }

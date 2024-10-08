@@ -16,7 +16,11 @@ public class SearchView extends JPanel {
     private JTable searchResultTable;
 
     public SearchView() {
-        setLayout(null);
+        initialize();
+    }
+    
+    public void initialize() {
+    	setLayout(null);
 
         JLabel titlePanel = new JLabel("Buscar Producto");
         titlePanel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -48,14 +52,7 @@ public class SearchView extends JPanel {
             }
 
             private void buscar() {
-                String nombre = searchName.getText();
-                if (nombre.isEmpty()) {
-                    // Limpiar la tabla si no hay texto en el campo de búsqueda
-                    DefaultTableModel tableModel = new DefaultTableModel();
-                    searchResultTable.setModel(tableModel);
-                } else {
-                    searchProduct(nombre);
-                }
+                searchByName();
             }
         });
         
@@ -64,36 +61,17 @@ public class SearchView extends JPanel {
         JScrollPane scrollPane = new JScrollPane(searchResultTable);
         scrollPane.setBounds(10, 76, 486, 138);
         add(scrollPane);
-
-        JButton searchButton = new JButton("Buscar producto");
-        searchButton.setBackground(new Color(255, 255, 255));
-        searchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nombre = searchName.getText();
-                if (nombre.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "El campo nombre es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    searchProduct(nombre);
-                }
-            }
-        });
-        searchButton.setBounds(254, 40, 142, 23);
-        add(searchButton);
     }
 
-    private void searchProduct(String nombre) {
+    public void searchProduct(String nombre) {
         try {
             ProductoDao productoDao = new ProductoDao();
             List<Producto> productos = productoDao.search(nombre);
 
             if (!productos.isEmpty()) {
-                // Definir las columnas del modelo de la tabla
                 String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad", "imagen"};
-
-                // Crear el modelo de la tabla con las columnas
                 DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
 
-                // Recorrer la lista de productos y agregar cada uno al modelo de la tabla
                 for (Producto producto : productos) {
                     Object[] fila = {
                         producto.getId(),
@@ -106,16 +84,27 @@ public class SearchView extends JPanel {
                     modelo.addRow(fila);
                 }
 
-                // Asignar el modelo a la tabla
+                
                 searchResultTable.setModel(modelo);
+                
             } else {
-                // Limpiar la tabla y mostrar un mensaje de que no se encontraron resultados
                 DefaultTableModel modelo = new DefaultTableModel();
                 searchResultTable.setModel(modelo);
                 JOptionPane.showMessageDialog(null, "Producto no encontrado", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al buscar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void searchByName() {
+    	String nombre = searchName.getText();
+        if (nombre.isEmpty()) {
+            // Limpiar la tabla si no hay texto en el campo de búsqueda
+            DefaultTableModel tableModel = new DefaultTableModel();
+            searchResultTable.setModel(tableModel);
+        } else {
+            searchProduct(nombre);
         }
     }
 }

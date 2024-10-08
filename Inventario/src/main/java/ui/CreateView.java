@@ -15,6 +15,10 @@ public class CreateView extends JPanel {
 	private JTextField imageText;
 
 	public CreateView() {
+		initialize();
+	}
+	
+	public void initialize() {
 		setLayout(null);
 
 		JLabel titlePanel = new JLabel("Creación de Productos");
@@ -78,31 +82,36 @@ public class CreateView extends JPanel {
 		createButton.setBounds(294, 134, 142, 23);
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nombre = nameText.getText();
-				String descripcion = descriptionText.getText();
-				double precio = Double.parseDouble(priceText.getText());
-				int cantidad = Integer.parseInt(amountText.getText()); 
-				String imagen = imageText.getText();
-
-				if(nombre.isEmpty() || descripcion.isEmpty() || priceText.getText().isEmpty() || amountText.getText().isEmpty() || imagen.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-					ProductoDao productoDao = new ProductoDao();
-					Producto producto = new Producto(nombre, descripcion, precio, cantidad, imagen);
-					if (productoDao.create(producto)) {
-						JOptionPane.showMessageDialog(null, "Producto creado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-						nameText.setText("");
-						descriptionText.setText("");
-						priceText.setText("");
-						amountText.setText("");
-						imageText.setText("");
-					}
-					else
-						JOptionPane.showMessageDialog(null, "Error al crear el producto", "Error", JOptionPane.ERROR_MESSAGE);
-
-				}
+				createProduct();
 			}
 		});
 		add(createButton);
 	}
+	
+	public void createProduct() {
+		String nombre = nameText.getText();
+		String descripcion = descriptionText.getText();
+		double precio = Double.parseDouble(priceText.getText());
+		int cantidad = Integer.parseInt(amountText.getText()); 
+		String imagen = imageText.getText();
+
+		if(nombre.isEmpty() || descripcion.isEmpty() || priceText.getText().isEmpty() || amountText.getText().isEmpty() || imagen.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			ProductoDao productoDao = new ProductoDao();
+			Producto producto = new Producto(nombre, descripcion, precio, cantidad, imagen);
+			if (productoDao.create(producto)) {
+				JOptionPane.showMessageDialog(null, "Producto creado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+				nameText.setText("");
+				descriptionText.setText("");
+				priceText.setText("");
+				amountText.setText("");
+				imageText.setText("");
+			}
+			else
+				JOptionPane.showMessageDialog(null, "Error al crear el producto", "Error", JOptionPane.ERROR_MESSAGE);
+
+		}
+	}
+	
 }

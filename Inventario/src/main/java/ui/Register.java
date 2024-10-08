@@ -31,17 +31,12 @@ public class Register extends JFrame{
 	private JTextField textField_1;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
+	private JCheckBox userRol;
 
-	/**
-	 * Create the application.
-	 */
 	public Register() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		this.setTitle("Registro de usuarios");
 		this.setBounds(100, 100, 326, 300);
@@ -96,25 +91,7 @@ public class Register extends JFrame{
 		registerButton.setBackground(new Color(255, 255, 255));
 		registerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nombre = textField.getText();
-				String correoElectronico = textField_1.getText();
-				String password = new String(passwordField.getPassword());
-				String confirmPassword = new String(passwordField_1.getPassword());
-				boolean rolSelect = userRol.isSelected();
-				
-				if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-					JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
-							"Error", JOptionPane.ERROR_MESSAGE);
-				}else if (!password.equals(confirmPassword)) {
-					 JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "La contraseñas no coinciden",
-							 "Error", JOptionPane.ERROR_MESSAGE);
-				}else {
-						UsuarioDao user = new UsuarioDao();
-						String rol = rolSelect ? "ADMINISTRADOR" : "USUARIO";
-			            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
-			            user.create(usu);
-				}
-				
+				register();
 			}
 		});
 		registerButton.setBounds(195, 227, 105, 23);
@@ -124,11 +101,7 @@ public class Register extends JFrame{
 		loginButton.setBackground(new Color(255, 255, 255));
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				Authentication auth = new Authentication();
-				auth.setVisible(true);
-				dispose();
-	
+				changeToLogin();
 			}
 		});
 		loginButton.setBounds(10, 227, 111, 23);
@@ -142,9 +115,33 @@ public class Register extends JFrame{
 		
 	}
 	
-	/**
-	 * Launch the application.
-	 */
+	public void register() {
+		String nombre = textField.getText();
+		String correoElectronico = textField_1.getText();
+		String password = new String(passwordField.getPassword());
+		String confirmPassword = new String(passwordField_1.getPassword());
+		boolean rolSelect = userRol.isSelected();
+		
+		if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+			JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}else if (!password.equals(confirmPassword)) {
+			 JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "La contraseñas no coinciden",
+					 "Error", JOptionPane.ERROR_MESSAGE);
+		}else {
+				UsuarioDao user = new UsuarioDao();
+				String rol = rolSelect ? "ADMINISTRADOR" : "USUARIO";
+	            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
+	            user.create(usu);
+		}
+	}
+	
+	public void changeToLogin() {
+		Authentication auth = new Authentication();
+		auth.setVisible(true);
+		dispose();
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

@@ -17,6 +17,10 @@ public class UpdateView extends JPanel {
 	private JTextField updateId;
 
 	public UpdateView() {
+		initialize();
+	}
+	
+	public void initialize() {
 		setLayout(null);
 		setPreferredSize(new Dimension(500, 301));
 
@@ -91,31 +95,7 @@ public class UpdateView extends JPanel {
 		searchButton.setBounds(294, 35, 142, 23);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String idText = updateId.getText();
-				if (idText.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "El campo ID es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-					return;
-				}
-
-				try {
-					ProductoDao productoDao = new ProductoDao();
-					int id = Integer.parseInt(idText);
-					Producto producto = productoDao.readById(id);
-
-					if (producto != null) {
-						updateName.setText(producto.getNombre());
-						updateDescription.setText(producto.getDescripcion());
-						updatePrice.setText(String.valueOf(producto.getPrecio()));
-						updateAmount.setText(String.valueOf(producto.getCantidad()));
-						updateImage.setText(producto.getImagenURI());
-					} else {
-						JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-					}
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null, "Error al buscar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-				}
+				search();
 			}
 		});
 		add(searchButton);
@@ -125,27 +105,59 @@ public class UpdateView extends JPanel {
 		updateButton.setBounds(270, 151, 166, 23);
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String idText = updateId.getText();
-				String nombre = updateName.getText();
-				String descripcion = updateDescription.getText();
-				double precio = Double.parseDouble(updatePrice.getText());
-				int cantidad = Integer.parseInt(updateAmount.getText());
-				String imagen = updateImage.getText();
-
-				if (idText.isEmpty() || nombre.isEmpty() || descripcion.isEmpty() || updatePrice.getText().isEmpty() || updateAmount.getText().isEmpty() || imagen.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-				} else {
-					ProductoDao productoDao = new ProductoDao();
-					int id = Integer.parseInt(idText);
-					Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagen);
-
-					if (productoDao.update(producto))
-						JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-					else
-						JOptionPane.showMessageDialog(null, "Error al actualizar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-				}
+				update();
 			}
 		});
 		add(updateButton);
+	}
+	
+	public void search() {
+		String idText = updateId.getText();
+		if (idText.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "El campo ID es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		try {
+			ProductoDao productoDao = new ProductoDao();
+			int id = Integer.parseInt(idText);
+			Producto producto = productoDao.readById(id);
+
+			if (producto != null) {
+				updateName.setText(producto.getNombre());
+				updateDescription.setText(producto.getDescripcion());
+				updatePrice.setText(String.valueOf(producto.getPrecio()));
+				updateAmount.setText(String.valueOf(producto.getCantidad()));
+				updateImage.setText(producto.getImagenURI());
+			} else {
+				JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (NumberFormatException ex) {
+			JOptionPane.showMessageDialog(null, "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "Error al buscar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void update() {
+		String idText = updateId.getText();
+		String nombre = updateName.getText();
+		String descripcion = updateDescription.getText();
+		double precio = Double.parseDouble(updatePrice.getText());
+		int cantidad = Integer.parseInt(updateAmount.getText());
+		String imagen = updateImage.getText();
+
+		if (idText.isEmpty() || nombre.isEmpty() || descripcion.isEmpty() || updatePrice.getText().isEmpty() || updateAmount.getText().isEmpty() || imagen.isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+			ProductoDao productoDao = new ProductoDao();
+			int id = Integer.parseInt(idText);
+			Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagen);
+
+			if (productoDao.update(producto))
+				JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			else
+				JOptionPane.showMessageDialog(null, "Error al actualizar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }

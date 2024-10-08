@@ -1,6 +1,8 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -31,7 +33,32 @@ public class SearchView extends JPanel {
         searchName.setColumns(10);
         searchName.setBounds(132, 41, 112, 20);
         add(searchName);
+        
+        searchName.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                buscar();
+            }
 
+            public void removeUpdate(DocumentEvent e) {
+                buscar();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                buscar();
+            }
+
+            private void buscar() {
+                String nombre = searchName.getText();
+                if (nombre.isEmpty()) {
+                    // Limpiar la tabla si no hay texto en el campo de búsqueda
+                    DefaultTableModel tableModel = new DefaultTableModel();
+                    searchResultTable.setModel(tableModel);
+                } else {
+                    searchProduct(nombre);
+                }
+            }
+        });
+        
         // Crear la tabla para mostrar los resultados
         searchResultTable = new JTable();
         JScrollPane scrollPane = new JScrollPane(searchResultTable);

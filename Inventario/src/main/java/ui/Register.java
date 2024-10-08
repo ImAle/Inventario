@@ -109,14 +109,10 @@ public class Register extends JFrame{
 					 JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "La contraseñas no coinciden",
 							 "Error", JOptionPane.ERROR_MESSAGE);
 				}else {
-					try {
 						UsuarioDao user = new UsuarioDao();
 						String rol = rolSelect ? "ADMINISTRADOR" : "USUARIO";
 			            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
 			            user.create(usu);
-					} catch (Exception e2) {
-						// TODO: handle exception
-					}
 				}
 				
 			}

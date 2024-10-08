@@ -143,7 +143,7 @@ public class UsuarioDao {
 			stmt.setString(1, nombreUsuario);
 			ResultSet rs = stmt.executeQuery(); 
 			password = HashUtil.hashPassword(password);
-			
+			System.out.println(password);
 			if (rs.next()) {
 				String passwordBd = rs.getString("password");
 				System.out.println();

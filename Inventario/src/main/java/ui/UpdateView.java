@@ -18,7 +18,7 @@ public class UpdateView extends JPanel {
 
 	public UpdateView() {
 		setLayout(null);
-		setPreferredSize(new Dimension(500, 300));
+		setPreferredSize(new Dimension(500, 402));
 
 		JLabel lblActualizacionDeProductos = new JLabel("Actualización de Productos");
 		lblActualizacionDeProductos.setHorizontalAlignment(SwingConstants.CENTER);
@@ -38,56 +38,56 @@ public class UpdateView extends JPanel {
 
 		JLabel productName = new JLabel("Nombre de producto:");
 		productName.setHorizontalAlignment(SwingConstants.RIGHT);
-		productName.setBounds(38, 74, 112, 14);
+		productName.setBounds(10, 67, 112, 14);
 		add(productName);
 
 		updateName = new JTextField();
 		updateName.setColumns(10);
-		updateName.setBounds(160, 71, 112, 20);
+		updateName.setBounds(132, 64, 112, 20);
 		add(updateName);
 
 		JLabel description = new JLabel("Descripción:");
 		description.setHorizontalAlignment(SwingConstants.RIGHT);
-		description.setBounds(38, 105, 112, 14);
+		description.setBounds(10, 95, 112, 14);
 		add(description);
 
 		updateDescription = new JTextField();
 		updateDescription.setColumns(10);
-		updateDescription.setBounds(160, 102, 112, 20);
+		updateDescription.setBounds(132, 92, 112, 20);
 		add(updateDescription);
 
 		JLabel price = new JLabel("Precio:");
 		price.setHorizontalAlignment(SwingConstants.RIGHT);
-		price.setBounds(282, 74, 60, 14);
+		price.setBounds(254, 67, 60, 14);
 		add(price);
 
 		updatePrice = new JTextField();
 		updatePrice.setColumns(10);
-		updatePrice.setBounds(352, 71, 112, 20);
+		updatePrice.setBounds(324, 64, 112, 20);
 		add(updatePrice);
 
 		JLabel amount = new JLabel("Cantidad:");
 		amount.setHorizontalAlignment(SwingConstants.RIGHT);
-		amount.setBounds(282, 105, 60, 14);
+		amount.setBounds(254, 95, 60, 14);
 		add(amount);
 
 		updateAmount = new JTextField();
 		updateAmount.setColumns(10);
-		updateAmount.setBounds(352, 102, 112, 20);
+		updateAmount.setBounds(324, 92, 112, 20);
 		add(updateAmount);
 
 		JLabel image = new JLabel("Imagen del producto:");
 		image.setHorizontalAlignment(SwingConstants.RIGHT);
-		image.setBounds(38, 136, 112, 14);
+		image.setBounds(10, 123, 112, 14);
 		add(image);
 
 		updateImage = new JTextField();
 		updateImage.setColumns(10);
-		updateImage.setBounds(160, 133, 112, 20);
+		updateImage.setBounds(132, 120, 112, 20);
 		add(updateImage);
 
 		JButton searchButton = new JButton("Buscar por ID");
-		searchButton.setBounds(282, 36, 142, 23);
+		searchButton.setBounds(294, 35, 142, 23);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idText = updateId.getText();
@@ -120,7 +120,7 @@ public class UpdateView extends JPanel {
 		add(searchButton);
 
 		JButton updateButton = new JButton("Actualizar producto");
-		updateButton.setBounds(10, 220, 142, 23);
+		updateButton.setBounds(179, 151, 142, 23);
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String idText = updateId.getText();

@@ -65,9 +65,9 @@ public class MainView extends JFrame {
         JButton listButton = new JButton("Listar");
         listButton.setBackground(new Color(255, 255, 255));
         listButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switchPanel(new ListView());
-            }
+        	public void actionPerformed(ActionEvent e) {
+        		switchPanel(new ListView());
+        	}
         });
         listButton.setBounds(10, 135, 89, 23);
         panel.add(listButton);
@@ -75,34 +75,28 @@ public class MainView extends JFrame {
         JButton searchButton = new JButton("Buscar");
         searchButton.setBackground(new Color(255, 255, 255));
         searchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switchPanel(new SearchView());
-            }
+        	public void actionPerformed(ActionEvent e) {
+        		switchPanel(new SearchView());
+        	}
         });
         searchButton.setBounds(10, 169, 89, 23);
         panel.add(searchButton);
-        
+
         switchPanel(new ListView());
+
+        if(this.rol == Rol.valueOf("USUARIO")) {
+        	createButton.setVisible(false);
+        	updateButton.setVisible(false);
+        	deleteButton.setVisible(false);
+        }
     }
 
     private void switchPanel(JPanel panel) {
-        layeredPane.removeAll();
-        layeredPane.add(panel);
-        layeredPane.repaint();
-        layeredPane.revalidate();
+    	layeredPane.removeAll();
+    	layeredPane.add(panel);
+    	layeredPane.repaint();
+    	layeredPane.revalidate();
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Rol rol = Rol.valueOf("ADMINISTRADOR");
-                    MainView frame = new MainView(rol);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
 }

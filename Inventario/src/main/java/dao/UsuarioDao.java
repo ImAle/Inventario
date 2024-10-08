@@ -134,10 +134,10 @@ public class UsuarioDao {
 		}
 	}
 	
-	public static boolean login(String nombreUsuario, String password) {
-		boolean exito = false;
+	public static int login(String nombreUsuario, String password) {
+		int id = -1;
 		
-		String sql = "SELECT password FROM Usuarios WHERE nombre = ?";
+		String sql = "SELECT id, password FROM Usuarios WHERE nombre = ?";
 		try (Connection conn = ConnectionManager.conectar();
 				PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, nombreUsuario);
@@ -149,7 +149,7 @@ public class UsuarioDao {
 				System.out.println();
 				
 				if(passwordBd.equals(password))
-					exito = true;
+					id = rs.getInt("id");
 				else
 					System.out.println("Contraseña incorrecta");
 			} else
@@ -159,7 +159,7 @@ public class UsuarioDao {
 			e.printStackTrace();
 		}
 		
-		return exito;
+		return id;
 	}
 
 }

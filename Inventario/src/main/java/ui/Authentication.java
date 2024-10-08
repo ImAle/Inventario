@@ -18,7 +18,7 @@ public class Authentication extends JFrame {
 
     private JTextField textFieldUser;
     private JPasswordField passwordField;
-    private Rol rolUser;
+    private UsuarioDao dao;
 
     public Authentication() {
         initialize();
@@ -56,15 +56,16 @@ public class Authentication extends JFrame {
 				
 				String usuario = textFieldUser.getText();
 				String password = new String(passwordField.getPassword());
+				int id;
 				
 				if (usuario.isEmpty() || password.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Los campos son obligatorios",
 							"Error", JOptionPane.ERROR_MESSAGE);
 				}
 				
-				if (UsuarioDao.login(usuario, password)) {
+				if ((id = UsuarioDao.login(usuario, password)) > -1) {
 					JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso", "Bienvenido", JOptionPane.INFORMATION_MESSAGE);
-					MainView mainView = new MainView(rolUser);
+					MainView mainView = new MainView(dao.readById(id).getRol());
 					mainView.setVisible(true); 
 					dispose();
 				}

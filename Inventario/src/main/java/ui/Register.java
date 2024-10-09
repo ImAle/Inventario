@@ -27,11 +27,10 @@ import java.awt.Color;
 public class Register extends JFrame{
 
 	private JFrame frmRegistroDeUsuarios;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JCheckBox userRol;
+	private JTextField nombreUsuario;
+	private JTextField correo;
+	private JPasswordField passwordField1;
+	private JPasswordField passwordField2;
 
 	public Register() {
 		initialize();
@@ -53,35 +52,35 @@ public class Register extends JFrame{
 		userName.setBounds(104, 55, 46, 14);
 		this.getContentPane().add(userName);
 		
-		textField = new JTextField();
-		textField.setBounds(160, 52, 140, 20);
-		this.getContentPane().add(textField);
-		textField.setColumns(10);
+		nombreUsuario = new JTextField();
+		nombreUsuario.setBounds(160, 52, 140, 20);
+		this.getContentPane().add(nombreUsuario);
+		nombreUsuario.setColumns(10);
 		
 		JLabel userMail = new JLabel("Email");
 		userMail.setBounds(104, 80, 46, 14);
 		this.getContentPane().add(userMail);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(160, 77, 140, 20);
-		this.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		correo = new JTextField();
+		correo.setBounds(160, 77, 140, 20);
+		this.getContentPane().add(correo);
+		correo.setColumns(10);
 		
 		JLabel userPassword = new JLabel("Contraseña");
 		userPassword.setBounds(82, 118, 68, 14);
 		this.getContentPane().add(userPassword);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(160, 115, 140, 20);
-		this.getContentPane().add(passwordField);
+		passwordField1 = new JPasswordField();
+		passwordField1.setBounds(160, 115, 140, 20);
+		this.getContentPane().add(passwordField1);
 		
 		JLabel userPasswordConfirm = new JLabel("Confirmar contraseña");
 		userPasswordConfirm.setBounds(24, 143, 126, 14);
 		this.getContentPane().add(userPasswordConfirm);
 		
-		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(160, 140, 140, 20);
-		this.getContentPane().add(passwordField_1);
+		passwordField2 = new JPasswordField();
+		passwordField2.setBounds(160, 140, 140, 20);
+		this.getContentPane().add(passwordField2);
 		
 		JButton registerButton = new JButton("Registrarse");
 		registerButton.setBackground(new Color(255, 255, 255));
@@ -112,10 +111,10 @@ public class Register extends JFrame{
 	}
 	
 	public void register() {
-		String nombre = textField.getText();
-		String correoElectronico = textField_1.getText();
-		String password = new String(passwordField.getPassword());
-		String confirmPassword = new String(passwordField_1.getPassword());
+		String nombre = nombreUsuario.getText();
+		String correoElectronico = correo.getText();
+		String password = new String(passwordField1.getPassword());
+		String confirmPassword = new String(passwordField2.getPassword());
 		
 		if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
 			JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
@@ -128,6 +127,9 @@ public class Register extends JFrame{
 				String rol = "USUARIO";
 	            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
 	            user.create(usu);
+	            JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Registrado exitosamente",
+						 "Error", JOptionPane.INFORMATION_MESSAGE);
+	            limpiarCampos();
 		}
 	}
 	
@@ -135,6 +137,13 @@ public class Register extends JFrame{
 		Authentication auth = new Authentication();
 		auth.setVisible(true);
 		dispose();
+	}
+	
+	public void limpiarCampos() {
+		nombreUsuario.setText("");
+		correo.setText("");
+		passwordField1.setText("");
+		passwordField2.setText("");
 	}
 	
 	public static void main(String[] args) {

@@ -83,10 +83,6 @@ public class Register extends JFrame{
 		passwordField_1.setBounds(160, 140, 140, 20);
 		this.getContentPane().add(passwordField_1);
 		
-		JCheckBox userRol = new JCheckBox("Rol administrador");
-		userRol.setBounds(160, 167, 126, 23);
-		this.getContentPane().add(userRol);
-		
 		JButton registerButton = new JButton("Registrarse");
 		registerButton.setBackground(new Color(255, 255, 255));
 		registerButton.addActionListener(new ActionListener() {
@@ -120,7 +116,6 @@ public class Register extends JFrame{
 		String correoElectronico = textField_1.getText();
 		String password = new String(passwordField.getPassword());
 		String confirmPassword = new String(passwordField_1.getPassword());
-		boolean rolSelect = userRol.isSelected();
 		
 		if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
 			JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
@@ -130,7 +125,7 @@ public class Register extends JFrame{
 					 "Error", JOptionPane.ERROR_MESSAGE);
 		}else {
 				UsuarioDao user = new UsuarioDao();
-				String rol = rolSelect ? "ADMINISTRADOR" : "USUARIO";
+				String rol = "USUARIO";
 	            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
 	            user.create(usu);
 		}

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import dao.ProductoDao;
 import model.Producto;
 
@@ -12,7 +14,8 @@ public class CreateView extends JPanel {
 	private JTextField descriptionText;
 	private JTextField priceText;
 	private JTextField amountText;
-	private JTextField imageText;
+	private String imagenPath;
+	private JLabel imagenLabel;
 
 	public CreateView() {
 		initialize();
@@ -66,20 +69,26 @@ public class CreateView extends JPanel {
 		amountText.setColumns(10);
 		amountText.setBounds(324, 72, 112, 20);
 		add(amountText);
+		
+		
+        JButton seleccionarImagenButton = new JButton("Seleccionar Imagen");
+        seleccionarImagenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccionarImagen();
+            }
+        });
+        seleccionarImagenButton.setBounds(284, 145, 150, 30);
+        add(seleccionarImagenButton);
 
-		JLabel image = new JLabel("Imagen del producto:");
-		image.setHorizontalAlignment(SwingConstants.RIGHT);
-		image.setBounds(10, 106, 112, 14);
-		add(image);
-
-		imageText = new JTextField();
-		imageText.setColumns(10);
-		imageText.setBounds(132, 103, 112, 20);
-		add(imageText);
+		imagenLabel = new JLabel("");
+		imagenLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		imagenLabel.setBounds(83, 102, 168, 149);
+		add(imagenLabel);
 
 		JButton createButton = new JButton("Crear producto");
 		createButton.setBackground(new Color(255, 255, 255));
-		createButton.setBounds(294, 134, 142, 23);
+		createButton.setBounds(284, 204, 152, 30);
 		createButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				createProduct();
@@ -92,21 +101,16 @@ public class CreateView extends JPanel {
 		String nombre = nameText.getText();
 		String descripcion = descriptionText.getText();
 		double precio = Double.parseDouble(priceText.getText());
-		int cantidad = Integer.parseInt(amountText.getText()); 
-		String imagen = imageText.getText();
+		int cantidad = Integer.parseInt(amountText.getText());
 
-		if(nombre.isEmpty() || descripcion.isEmpty() || priceText.getText().isEmpty() || amountText.getText().isEmpty() || imagen.isEmpty()) {
+		if(nombre.isEmpty() || descripcion.isEmpty() || priceText.getText().isEmpty() || amountText.getText().isEmpty() || imagenPath.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			ProductoDao productoDao = new ProductoDao();
-			Producto producto = new Producto(nombre, descripcion, precio, cantidad, imagen);
+			Producto producto = new Producto(nombre, descripcion, precio, cantidad, imagenPath);
 			if (productoDao.create(producto)) {
 				JOptionPane.showMessageDialog(null, "Producto creado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-				nameText.setText("");
-				descriptionText.setText("");
-				priceText.setText("");
-				amountText.setText("");
-				imageText.setText("");
+				limpiarCampos();
 			}
 			else
 				JOptionPane.showMessageDialog(null, "Error al crear el producto", "Error", JOptionPane.ERROR_MESSAGE);
@@ -114,4 +118,23 @@ public class CreateView extends JPanel {
 		}
 	}
 	
+	private void seleccionarImagen() {
+        JFileChooser fileChooser = new JFileChooser();
+        int numero = fileChooser.showOpenDialog(this);
+        if (numero == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            imagenPath = file.getAbsolutePath();
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+            imagenLabel.setIcon(imageIcon); // Mostrar la imagen seleccionada
+        }
+    }
+
+	private void limpiarCampos() {
+	    nameText.setText("");
+	    descriptionText.setText("");
+	    priceText.setText("");
+	    amountText.setText("");
+	    imagenLabel.setIcon(null);  // Limpiamos la imagen mostrada
+	    imagenPath = null;  // Reiniciamos el path de la imagen
+	}
 }

@@ -36,12 +36,12 @@ public class ListView extends JPanel {
     public void listProducts() {
             ProductoDao productoDao = new ProductoDao();
             List<Producto> productos = productoDao.readAll();
-            String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad", "imagen"};
+            String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad"};
 	        DefaultTableModel modelo = new DefaultTableModel(columnas, 0); 
 
 	        for (Producto producto : productos) {
 	            Object[] columna = {producto.getId(),producto.getNombre(),producto.getDescripcion(),
-	            		producto.getPrecio(),producto.getCantidad(),producto.getImagenURI()};
+	            		producto.getPrecio(),producto.getCantidad()};
 	            modelo.addRow(columna);
 	        }
 	        table.setModel(modelo);

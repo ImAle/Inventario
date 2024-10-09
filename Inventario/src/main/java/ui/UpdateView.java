@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import dao.ProductoDao;
 import model.Producto;
@@ -13,8 +14,9 @@ public class UpdateView extends JPanel {
 	private JTextField updateDescription;
 	private JTextField updatePrice;
 	private JTextField updateAmount;
-	private JTextField updateImage;
 	private JTextField updateId;
+	private String imagenPath;
+	private JLabel imagenLabel;
 
 	public UpdateView() {
 		initialize();
@@ -80,15 +82,10 @@ public class UpdateView extends JPanel {
 		updateAmount.setBounds(324, 92, 112, 20);
 		add(updateAmount);
 
-		JLabel image = new JLabel("Imagen del producto:");
-		image.setHorizontalAlignment(SwingConstants.RIGHT);
-		image.setBounds(10, 123, 112, 14);
-		add(image);
-
-		updateImage = new JTextField();
-		updateImage.setColumns(10);
-		updateImage.setBounds(132, 120, 112, 20);
-		add(updateImage);
+		imagenLabel = new JLabel();
+		imagenLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		imagenLabel.setBounds(132, 145, 112, 92);
+		add(imagenLabel);
 
 		JButton searchButton = new JButton("Buscar por ID");
 		searchButton.setBackground(new Color(120, 141, 241));
@@ -99,10 +96,21 @@ public class UpdateView extends JPanel {
 			}
 		});
 		add(searchButton);
+		
+		JButton seleccionarImagenButton = new JButton("Seleccionar Imagen");
+        seleccionarImagenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccionarImagen();
+            }
+        });
+        seleccionarImagenButton.setBounds(284, 145, 150, 30);
+        add(seleccionarImagenButton);
+
 
 		JButton updateButton = new JButton("Actualizar producto");
 		updateButton.setBackground(new Color(255, 255, 255));
-		updateButton.setBounds(270, 151, 166, 23);
+		updateButton.setBounds(285, 200, 150, 30);
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				update();
@@ -128,7 +136,7 @@ public class UpdateView extends JPanel {
 				updateDescription.setText(producto.getDescripcion());
 				updatePrice.setText(String.valueOf(producto.getPrecio()));
 				updateAmount.setText(String.valueOf(producto.getCantidad()));
-				updateImage.setText(producto.getImagenURI());
+				imagenLabel.setIcon(new ImageIcon(new ImageIcon(producto.getImagenURI()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
 			} else {
 				JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 			}
@@ -145,19 +153,43 @@ public class UpdateView extends JPanel {
 		String descripcion = updateDescription.getText();
 		double precio = Double.parseDouble(updatePrice.getText());
 		int cantidad = Integer.parseInt(updateAmount.getText());
-		String imagen = updateImage.getText();
 
-		if (idText.isEmpty() || nombre.isEmpty() || descripcion.isEmpty() || updatePrice.getText().isEmpty() || updateAmount.getText().isEmpty() || imagen.isEmpty()) {
+		if (idText.isEmpty() || nombre.isEmpty() || descripcion.isEmpty() || updatePrice.getText().isEmpty() || updateAmount.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			ProductoDao productoDao = new ProductoDao();
 			int id = Integer.parseInt(idText);
-			Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagen);
-
-			if (productoDao.update(producto))
+			String imagenBbdd = productoDao.readById(id).getImagenURI();
+			String imagenFinal = (imagenPath != null && !imagenPath.isEmpty()) ? imagenPath : imagenBbdd;
+			Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagenFinal);
+			
+			if (productoDao.update(producto)) {
 				JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+				limpiarCampos();
+			}
 			else
 				JOptionPane.showMessageDialog(null, "Error al actualizar el producto", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	private void seleccionarImagen() {
+		JFileChooser fileChooser = new JFileChooser();
+        int numero = fileChooser.showOpenDialog(this);
+        if (numero == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            imagenPath = file.getAbsolutePath(); // Actualizamos imagenPath si se selecciona una nueva imagen
+            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)); 
+            imagenLabel.setIcon(imageIcon); // Mostrar la nueva imagen seleccionada
+        }
+    }
+	
+	private void limpiarCampos() {
+	    updateId.setText("");
+	    updateName.setText("");
+	    updateDescription.setText("");
+	    updatePrice.setText("");
+	    updateAmount.setText("");
+	    imagenLabel.setIcon(null);  // Limpiamos la imagen mostrada
+	    imagenPath = null;  // Reiniciamos el path de la imagen
 	}
 }

@@ -69,7 +69,7 @@ public class SearchView extends JPanel {
             List<Producto> productos = productoDao.search(nombre);
 
             if (!productos.isEmpty()) {
-                String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad", "imagen"};
+                String[] columnas = {"id", "nombre", "descripción", "precio", "cantidad"};
                 DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
 
                 for (Producto producto : productos) {
@@ -78,8 +78,7 @@ public class SearchView extends JPanel {
                         producto.getNombre(),
                         producto.getDescripcion(),
                         producto.getPrecio(),
-                        producto.getCantidad(),
-                        producto.getImagenURI()
+                        producto.getCantidad()
                     };
                     modelo.addRow(fila);
                 }

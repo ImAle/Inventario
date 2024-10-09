@@ -3,8 +3,10 @@ package ui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.SwingConstants;
 
@@ -13,6 +15,7 @@ import dao.UsuarioDao;
 import model.Producto;
 import model.Usuario;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -25,6 +28,7 @@ public class ReadView extends JPanel {
 	private JTextField descripcionField;
 	private JTextField cantidadField;
 	private JTextField precioField;
+	private JLabel imagenLabel;
 
 
 	public ReadView() {
@@ -34,21 +38,21 @@ public class ReadView extends JPanel {
 	public void initialize() {
 		setLayout(null);
 		
-		JLabel lblImagenDelProducto = new JLabel("Imagen del Producto");
-		lblImagenDelProducto.setHorizontalAlignment(SwingConstants.CENTER);
-		lblImagenDelProducto.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblImagenDelProducto.setBounds(10, 11, 234, 14);
-		add(lblImagenDelProducto);
+		imagenLabel = new JLabel();
+		imagenLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		imagenLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		imagenLabel.setBounds(112, 137, 144, 83);
+		add(imagenLabel);
 		
 		idText = new JTextField();
 		idText.setBounds(132, 36, 112, 20);
 		add(idText);
 		idText.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Id del producto:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_1.setBounds(45, 39, 77, 14);
-		add(lblNewLabel_1);
+		JLabel idLabel = new JLabel("Id del producto:");
+		idLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		idLabel.setBounds(45, 39, 77, 14);
+		add(idLabel);
 		
 		JLabel productName = new JLabel("Nombre de producto:");
 		productName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -71,11 +75,6 @@ public class ReadView extends JPanel {
 		description.setHorizontalAlignment(SwingConstants.RIGHT);
 		description.setBounds(10, 98, 112, 14);
 		add(description);
-		
-		JLabel lblImagen = new JLabel("Imagen:");
-		lblImagen.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblImagen.setBounds(454, 39, 50, 14);
-		add(lblImagen);
 		
 		JLabel amount = new JLabel("Cantidad:");
 		amount.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -101,7 +100,7 @@ public class ReadView extends JPanel {
 		
 		JButton searchButton = new JButton("Leer");
 		searchButton.setBackground(new Color(255, 255, 255));
-		searchButton.setBounds(210, 126, 89, 23);
+		searchButton.setBounds(326, 128, 89, 23);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buscarProducto();
@@ -120,6 +119,9 @@ public class ReadView extends JPanel {
 		descripcionField.setText(producto.getDescripcion());
 		cantidadField.setText(String.valueOf(producto.getCantidad()));
 		precioField.setText(String.valueOf(producto.getPrecio()));
+		
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(producto.getImagenURI()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        imagenLabel.setIcon(imageIcon);
 		
 	}
 }

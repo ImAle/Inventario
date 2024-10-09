@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import dao.ProductoDao;
 import model.Producto;
@@ -121,67 +124,96 @@ public class UpdateView extends JPanel {
 	
 	public void search() {
 		String idText = updateId.getText();
-		if (idText.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "El campo ID es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
+	    if (idText.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "El campo ID es obligatorio", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
 
-		try {
-			ProductoDao productoDao = new ProductoDao();
-			int id = Integer.parseInt(idText);
-			Producto producto = productoDao.readById(id);
+	    try {
+	        ProductoDao productoDao = new ProductoDao();
+	        int id = Integer.parseInt(idText);
+	        Producto producto = productoDao.readById(id);
 
-			if (producto != null) {
-				updateName.setText(producto.getNombre());
-				updateDescription.setText(producto.getDescripcion());
-				updatePrice.setText(String.valueOf(producto.getPrecio()));
-				updateAmount.setText(String.valueOf(producto.getCantidad()));
-				imagenLabel.setIcon(new ImageIcon(new ImageIcon(producto.getImagenURI()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT)));
-			} else {
-				JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(null, "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Error al buscar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-		}
+	        if (producto != null) {
+	            updateName.setText(producto.getNombre());
+	            updateDescription.setText(producto.getDescripcion());
+	            updatePrice.setText(String.valueOf(producto.getPrecio()));
+	            updateAmount.setText(String.valueOf(producto.getCantidad()));
+
+	            // Convertir ruta relativa a ruta absoluta y verificar si existe
+	            String projectDir = System.getProperty("user.dir");
+	            File imagenFile = new File(projectDir, "src/main/java" + producto.getImagenURI());
+	            if (imagenFile.exists()) {
+	                ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenFile.getAbsolutePath()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+	                imagenLabel.setIcon(imageIcon);
+	            } else {
+	                imagenLabel.setIcon(null);
+	                JOptionPane.showMessageDialog(null, "Imagen no encontrada", "Advertencia", JOptionPane.WARNING_MESSAGE);
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Producto no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    } catch (NumberFormatException ex) {
+	        JOptionPane.showMessageDialog(null, "ID inválido", "Error", JOptionPane.ERROR_MESSAGE);
+	    } catch (Exception ex) {
+	        JOptionPane.showMessageDialog(null, "Error al buscar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+	    }
 	}
 	
 	public void update() {
 		String idText = updateId.getText();
-		String nombre = updateName.getText();
-		String descripcion = updateDescription.getText();
-		double precio = Double.parseDouble(updatePrice.getText());
-		int cantidad = Integer.parseInt(updateAmount.getText());
+	    String nombre = updateName.getText();
+	    String descripcion = updateDescription.getText();
+	    double precio = Double.parseDouble(updatePrice.getText());
+	    int cantidad = Integer.parseInt(updateAmount.getText());
 
-		if (idText.isEmpty() || nombre.isEmpty() || descripcion.isEmpty() || updatePrice.getText().isEmpty() || updateAmount.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
-		} else {
-			ProductoDao productoDao = new ProductoDao();
-			int id = Integer.parseInt(idText);
-			String imagenBbdd = productoDao.readById(id).getImagenURI();
-			String imagenFinal = (imagenPath != null && !imagenPath.isEmpty()) ? imagenPath : imagenBbdd;
-			Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagenFinal);
-			
-			if (productoDao.update(producto)) {
-				JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-				limpiarCampos();
-			}
-			else
-				JOptionPane.showMessageDialog(null, "Error al actualizar el producto", "Error", JOptionPane.ERROR_MESSAGE);
-		}
+	    if (idText.isEmpty() || nombre.isEmpty() || descripcion.isEmpty() || updatePrice.getText().isEmpty() || updateAmount.getText().isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+	    } else {
+	        ProductoDao productoDao = new ProductoDao();
+	        int id = Integer.parseInt(idText);
+
+	        // Obtener la imagen original de la base de datos si no se selecciona una nueva
+	        String imagenBbdd = productoDao.readById(id).getImagenURI();
+	        String imagenFinal = (imagenPath != null && !imagenPath.isEmpty()) ? "/resources/" + new File(imagenPath).getName() : imagenBbdd;
+
+	        // Crear producto actualizado con la imagen final
+	        Producto producto = new Producto(id, nombre, descripcion, precio, cantidad, imagenFinal);
+	        
+	        if (productoDao.update(producto)) {
+	            JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	            limpiarCampos();
+	        } else {
+	            JOptionPane.showMessageDialog(null, "Error al actualizar el producto", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    }
 	}
 	
 	private void seleccionarImagen() {
 		JFileChooser fileChooser = new JFileChooser();
-        int numero = fileChooser.showOpenDialog(this);
-        if (numero == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            imagenPath = file.getAbsolutePath(); // Actualizamos imagenPath si se selecciona una nueva imagen
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT)); 
-            imagenLabel.setIcon(imageIcon); // Mostrar la nueva imagen seleccionada
-        }
-    }
+	    int numero = fileChooser.showOpenDialog(this);
+	    if (numero == JFileChooser.APPROVE_OPTION) {
+	        File file = fileChooser.getSelectedFile();
+
+	        // Obtener la ruta de la carpeta "resources" directamente
+	        String projectDir = System.getProperty("user.dir");
+	        File resourcesDir = new File(projectDir, "src/main/java/resources");
+
+	        // Copiar la imagen seleccionada a la carpeta "resources"
+	        File destino = new File(resourcesDir, file.getName());
+	        try {
+	            Files.copy(file.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+	            imagenPath = destino.getAbsolutePath(); // Ruta donde se ha copiado la imagen
+
+	            // Mostrar la imagen seleccionada
+	            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+	            imagenLabel.setIcon(imageIcon);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener la imagen", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    }
+	}
 	
 	private void limpiarCampos() {
 	    updateId.setText("");

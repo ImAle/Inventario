@@ -92,12 +92,12 @@ public class ReadView extends JPanel {
 		precioField.setColumns(10);
 		precioField.setBounds(324, 36, 112, 20);
 		add(precioField);
-		
+
 		JLabel price = new JLabel("Precio:");
 		price.setHorizontalAlignment(SwingConstants.RIGHT);
 		price.setBounds(254, 39, 60, 14);
 		add(price);
-		
+
 		JButton searchButton = new JButton("Leer");
 		searchButton.setBackground(new Color(255, 255, 255));
 		searchButton.setBounds(326, 128, 89, 23);
@@ -109,19 +109,27 @@ public class ReadView extends JPanel {
 		add(searchButton);
 
 	}
-	
+
 	public void buscarProducto() {
 		ProductoDao dao = new ProductoDao();
 		int id = Integer.parseInt(idText.getText());
 		Producto producto = dao.readById(id);
-		
+
 		nameField.setText(producto.getNombre());
 		descripcionField.setText(producto.getDescripcion());
 		cantidadField.setText(String.valueOf(producto.getCantidad()));
 		precioField.setText(String.valueOf(producto.getPrecio()));
-		
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(producto.getImagenURI()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-        imagenLabel.setIcon(imageIcon);
-		
+
+		// Convertir la ruta relativa a una ruta absoluta
+		String projectDir = System.getProperty("user.dir");
+		File imagenFile = new File(projectDir, "src/main/java" + producto.getImagenURI());
+
+		// Verificar si la imagen existe antes de intentar cargarla
+		if (imagenFile.exists()) {
+			ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenFile.getAbsolutePath()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+			imagenLabel.setIcon(imageIcon);
+
+		}
+
 	}
 }

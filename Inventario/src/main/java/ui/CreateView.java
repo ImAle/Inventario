@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 import dao.ProductoDao;
 import model.Producto;
@@ -103,31 +106,50 @@ public class CreateView extends JPanel {
 		double precio = Double.parseDouble(priceText.getText());
 		int cantidad = Integer.parseInt(amountText.getText());
 
-		if(nombre.isEmpty() || descripcion.isEmpty() || priceText.getText().isEmpty() || amountText.getText().isEmpty() || imagenPath.isEmpty()) {
+		if (nombre.isEmpty() || descripcion.isEmpty() || priceText.getText().isEmpty() || amountText.getText().isEmpty() || imagenPath == null || imagenPath.isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
 		} else {
 			ProductoDao productoDao = new ProductoDao();
-			Producto producto = new Producto(nombre, descripcion, precio, cantidad, imagenPath);
+
+			// Obtener ruta relativa para la imagen que se guardará en resources
+			String relativeImagePath = "/resources/" + new File(imagenPath).getName();
+
+			// Crear el nuevo producto con la ruta relativa de la imagen
+			Producto producto = new Producto(nombre, descripcion, precio, cantidad, relativeImagePath);
+			
 			if (productoDao.create(producto)) {
 				JOptionPane.showMessageDialog(null, "Producto creado exitosamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 				limpiarCampos();
-			}
-			else
+			} else {
 				JOptionPane.showMessageDialog(null, "Error al crear el producto", "Error", JOptionPane.ERROR_MESSAGE);
-
+			}
 		}
 	}
 	
 	private void seleccionarImagen() {
-        JFileChooser fileChooser = new JFileChooser();
-        int numero = fileChooser.showOpenDialog(this);
-        if (numero == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            imagenPath = file.getAbsolutePath();
-            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
-            imagenLabel.setIcon(imageIcon); // Mostrar la imagen seleccionada
-        }
-    }
+		JFileChooser fileChooser = new JFileChooser();
+		int numero = fileChooser.showOpenDialog(this);
+		if (numero == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+
+			// Obtener la ruta de la carpeta "resources" directamente
+			String projectDir = System.getProperty("user.dir");
+			File resourcesDir = new File(projectDir, "src/main/java/resources");
+
+			// Copiar la imagen seleccionada a la carpeta "resources"
+			File destino = new File(resourcesDir, file.getName());
+			try {
+				Files.copy(file.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+				imagenPath = destino.getAbsolutePath(); // Ruta donde se ha copiado la imagen
+
+				ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+				imagenLabel.setIcon(imageIcon);
+			} catch (IOException e) {
+				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Error al obtener la imagen", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
 
 	private void limpiarCampos() {
 	    nameText.setText("");

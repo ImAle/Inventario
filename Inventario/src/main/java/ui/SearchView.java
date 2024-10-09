@@ -30,12 +30,12 @@ public class SearchView extends JPanel {
 
         JLabel nameLabel = new JLabel("Nombre de producto:");
         nameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        nameLabel.setBounds(10, 44, 112, 14);
+        nameLabel.setBounds(10, 44, 140, 14);
         add(nameLabel);
 
         searchName = new JTextField();
         searchName.setColumns(10);
-        searchName.setBounds(132, 41, 112, 20);
+        searchName.setBounds(186, 42, 112, 20);
         add(searchName);
         
         searchName.getDocument().addDocumentListener(new DocumentListener() {

@@ -1,3 +1,5 @@
+------------------------Creación tablas---------------------------
+
 CREATE TABLE Usuarios (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) UNIQUE NOT NULL,
@@ -14,50 +16,39 @@ CREATE TABLE Productos (
     cantidad INT NOT NULL,
     imagen VARCHAR(255)
 );
+-------------------------Administrador----------------------------
 
 INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('admin1', 'admin1@example.com', 'user', 'ADMINISTRADOR');
+VALUES ('admin', 'admin1@example.com', '2dsNTT/6cfJRBRuebs0yqPoNRRW48yqwsgWn75EANp4=', 'ADMINISTRADOR');
 
-INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('usuario1', 'usuario1@example.com', 'user', 'USUARIO');
-
-INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('admin2', 'admin2@example.com', 'user', 'ADMINISTRADOR');
-
-INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('usuario2', 'usuario2@example.com', 'user', 'USUARIO');
-
-INSERT INTO Usuarios (nombre, correo_electronico, password, rol) 
-VALUES ('usuario3', 'usuario3@example.com', 'user', 'USUARIO');
-
-
+---------------------------Productos------------------------------
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 1', 'Descripción del Producto 1', 25.50, 100, 'imagen1.jpg');
+VALUES ('Camiseta', 'Camiseta de algodón', 19.99, 50, '/resources/camiseta.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 2', 'Descripción del Producto 2', 15.75, 200, 'imagen2.jpg');
+VALUES ('Zapatillas', 'Zapatillas ligeras', 59.99, 30, '/resources/zapatillas.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 3', 'Descripción del Producto 3', 99.99, 50, 'imagen3.jpg');
+VALUES ('Mochila', 'Mochila con múltiples compartimentos', 29.50, 20, '/resources/mochila.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 4', 'Descripción del Producto 4', 45.00, 10, 'imagen4.jpg');
+VALUES ('Reloj Inteligente', 'Reloj con monitor de frecuencia cardíaca y GPS', 149.99, 15, '/resources/reloj_inteligente.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 5', 'Descripción del Producto 5', 65.99, 30, 'imagen5.jpg');
+VALUES ('Auriculares Bluetooth', 'Auriculares inalámbricos con cancelación de ruido', 89.90, 40, '/resources/auriculares_bluetooth.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 6', 'Descripción del Producto 6', 12.00, 500, 'imagen6.jpg');
+VALUES ('Portátil', 'Portátil de alto rendimiento para videojuegos', 1200.00, 10, '/resources/portatil.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 7', 'Descripción del Producto 7', 150.75, 5, 'imagen7.jpg');
+VALUES ('Lámpara LED', 'Lámpara de escritorio con luz ajustable', 24.99, 60, '/resources/lampara_led.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 8', 'Descripción del Producto 8', 75.49, 25, 'imagen8.jpg');
+VALUES ('Ratón Inalámbrico', 'Ratón ergonómico con Bluetooth', 34.90, 75, '/resources/raton_inalambrico.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 9', 'Descripción del Producto 9', 23.89, 60, 'imagen9.jpg');
+VALUES ('Teclado Mecánico', 'Teclado mecánico con iluminación RGB', 99.99, 25, '/resources/teclado_mecanico.jpg');
 
 INSERT INTO Productos (nombre, descripcion, precio, cantidad, imagen)
-VALUES ('Producto 10', 'Descripción del Producto 10', 35.60, 80, 'imagen10.jpg');
+VALUES ('Silla', 'Silla ergonómica con soporte lumbar ajustable', 199.99, 8, '/resources/silla_ergonomica.jpg');

@@ -111,26 +111,29 @@ public class Register extends JFrame{
 	}
 	
 	public void register() {
-		String nombre = nombreUsuario.getText();
-		String correoElectronico = correo.getText();
-		String password = new String(passwordField1.getPassword());
-		String confirmPassword = new String(passwordField2.getPassword());
-		
-		if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-			JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
-					"Error", JOptionPane.ERROR_MESSAGE);
-		}else if (!password.equals(confirmPassword)) {
-			 JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "La contraseñas no coinciden",
-					 "Error", JOptionPane.ERROR_MESSAGE);
-		}else {
-				UsuarioDao user = new UsuarioDao();
-				String rol = "USUARIO";
-	            Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
-	            user.create(usu);
-	            JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Registrado exitosamente",
-						 "Error", JOptionPane.INFORMATION_MESSAGE);
-	            limpiarCampos();
-		}
+	    String nombre = nombreUsuario.getText();
+	    String correoElectronico = correo.getText();
+	    String password = new String(passwordField1.getPassword());
+	    String confirmPassword = new String(passwordField2.getPassword());
+	    
+	    if (nombre.isEmpty() || correoElectronico.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+	        JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Los campos son obligatorios",
+	                "Error", JOptionPane.ERROR_MESSAGE);
+	    } else if (!password.equals(confirmPassword)) {
+	        JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Las contraseñas no coinciden",
+	                "Error", JOptionPane.ERROR_MESSAGE);
+	    } else if (!isPasswordStrong(password)) {
+	        JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "La contraseña debe ser fuerte (mínimo 8 caracteres, una letra mayúscula, una minúscula, un número y un símbolo)",
+	                "Error", JOptionPane.ERROR_MESSAGE);
+	    } else {
+	        UsuarioDao user = new UsuarioDao();
+	        String rol = "USUARIO";
+	        Usuario usu = new Usuario(nombre, correoElectronico, password, Rol.valueOf(rol));
+	        user.create(usu);
+	        JOptionPane.showMessageDialog(frmRegistroDeUsuarios, "Registrado exitosamente",
+	                "Información", JOptionPane.INFORMATION_MESSAGE);
+	        limpiarCampos();
+	    }
 	}
 	
 	public void changeToLogin() {
@@ -144,6 +147,10 @@ public class Register extends JFrame{
 		correo.setText("");
 		passwordField1.setText("");
 		passwordField2.setText("");
+	}
+	
+	private boolean isPasswordStrong(String password) {
+	    return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
 	}
 	
 	public static void main(String[] args) {

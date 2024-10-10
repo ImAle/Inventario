@@ -113,7 +113,7 @@ public class CreateView extends JPanel {
 
 			// Obtener ruta relativa para la imagen que se guardará en resources
 			String relativeImagePath = "/resources/" + new File(imagenPath).getName();
-
+			
 			// Crear el nuevo producto con la ruta relativa de la imagen
 			Producto producto = new Producto(nombre, descripcion, precio, cantidad, relativeImagePath);
 			
@@ -134,8 +134,8 @@ public class CreateView extends JPanel {
 
 			// Obtener la ruta de la carpeta "resources" directamente
 			String projectDir = System.getProperty("user.dir");
-			File resourcesDir = new File(projectDir, "src/main/java/resources");
-
+			File resourcesDir = new File(projectDir, "main/java/resources");
+			
 			// Copiar la imagen seleccionada a la carpeta "resources"
 			File destino = new File(resourcesDir, file.getName());
 			try {

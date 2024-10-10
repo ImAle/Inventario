@@ -142,7 +142,7 @@ public class UpdateView extends JPanel {
 
 	            // Convertir ruta relativa a ruta absoluta y verificar si existe
 	            String projectDir = System.getProperty("user.dir");
-	            File imagenFile = new File(projectDir, "src/main/java" + producto.getImagenURI());
+	            File imagenFile = new File(projectDir, "main/java" + producto.getImagenURI());
 	            if (imagenFile.exists()) {
 	                ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenFile.getAbsolutePath()).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
 	                imagenLabel.setIcon(imageIcon);
@@ -197,14 +197,13 @@ public class UpdateView extends JPanel {
 
 	        // Obtener la ruta de la carpeta "resources" directamente
 	        String projectDir = System.getProperty("user.dir");
-	        File resourcesDir = new File(projectDir, "src/main/java/resources");
-
+	        File resourcesDir = new File(projectDir, "main/java/resources/");
+	        
 	        // Copiar la imagen seleccionada a la carpeta "resources"
 	        File destino = new File(resourcesDir, file.getName());
 	        try {
 	            Files.copy(file.toPath(), destino.toPath(), StandardCopyOption.REPLACE_EXISTING);
 	            imagenPath = destino.getAbsolutePath(); // Ruta donde se ha copiado la imagen
-
 	            // Mostrar la imagen seleccionada
 	            ImageIcon imageIcon = new ImageIcon(new ImageIcon(imagenPath).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
 	            imagenLabel.setIcon(imageIcon);

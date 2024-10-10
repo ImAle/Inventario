@@ -122,7 +122,7 @@ public class ReadView extends JPanel {
 
 		// Convertir la ruta relativa a una ruta absoluta
 		String projectDir = System.getProperty("user.dir");
-		File imagenFile = new File(projectDir, "src/main/java" + producto.getImagenURI());
+		File imagenFile = new File(projectDir, "main/java" + producto.getImagenURI());
 
 		// Verificar si la imagen existe antes de intentar cargarla
 		if (imagenFile.exists()) {
